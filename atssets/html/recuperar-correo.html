@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Recuperar Contraseña - Paso 1</title>
+</head>
+<body class="form-recuperar">
+    <div class="contenedor-recuperacion">
+        <h2 class="titulo-recuperacion">Recuperar Contraseña</h2>
+        <form id="form-recuperar-correo">
+            <div class="campo-recuperacion">
+                <label for="correo-recuperacion" class="label-recuperacion">Correo Electrónico:</label>
+                <input type="email" id="correo-recuperacion"  placeholder="Ingrese su correo"  name="correo" class="input-recuperacion" required>
+            </div>
+            <button type="submit" class="boton-recuperacion">Enviar Código</button>
+            <div id="mensaje-correo" class="mensaje-recuperacion"></div>
+        </form>
+    </div>
+    <script src="../js/recuperar.js"></script>
+</body>
+</html>
