@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Calificar Asignaturas</title>
+</head>
+<body>
+
+    <header>
+        <div class="header__superior">
+            <div class="logo">
+                <img src="../img/logoredu.png" alt="ReU">
+            </div>
+          
+        </div>
+    
+        <div class="container__menu">
+    <div class="menu">
+        <input type="checkbox" id="check__menu">
+        <label id="label__check" for="check__menu">
+            <i class="fa-solid fa-bars icon__menu"></i>
+        </label>
+        <nav>
+            <ul>
+              <li><a href="../html/inicio.html">Inicio</a></li>
+              
+              <li><a href="#">Configuración</a>
+            <ul>
+                <li><a href="principal-pensum.html">Pensum</a></li>
+                <li><a href="notas-iniciales.html">Carga de notas iniciales</a></li>
+                <li><a href="bitacora.html">Bitácora</a></li>
+                <li><a href="principal-conf-general.html">General</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Control de Estudio</a>
+            <ul>
+                <li><a href="principal-ofer-academica.html">Ofertas Académicas</a></li>
+                <li><a href="inscripciones.html">Inscripciones</a></li>
+                <li><a href="principal-retiro-materias.html">Retiro de materias</a></li>
+                <li><a href="principal-carga-notas.html">Consulta y Carga de Notas</a></li>
+                <li><a href="principal-trabajos-investigacion.html">Trabajos de Investigación</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Usuarios</a>
+            <ul>
+                <li><a href="usuarios.html">Usuarios</a></li>
+                <li><a href="principal-profesores.html">Profesores</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Perfil</a>
+            <ul>
+                <li><span>Nombre de Usuario</span></li> 
+                <li><a href="mis-datos.html">Mis datos</a></li>
+                <li><a href="cambiar-contrasena.html">Cambiar contraseña</a></li>
+                <li><a href="#">Cerrar sesión <i class="fa-solid fa-right-from-bracket icon__log-out"></i></a></li>
+            </ul>
+        </li>
+    </ul>
+    </nav>
+    </div>
+    </div>
+    </header>
+
+    <div id="editarCalificacionModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Calificación</h2>
+            <form id="editar-calificacion-modal-form">
+                <label for="editar-periodo">Periodo:</label>
+                <select id="editar-periodo" name="editar-periodo" required>
+                    <option value="2024-1">2024-1</option>
+                    <option value="2024-2">2024-2</option>
+                </select>
+    
+                <label for="editar-asignatura">Asignatura:</label>
+                <select id="editar-asignatura" name="editar-asignatura" required>
+                    <option value="mat101">Matematicas I</option>
+                    <option value="fis101">Fisica I</option>
+                </select>
+    
+                <label for="editar-seccion">Sección:</label>
+                <input type="text" id="editar-seccion" name="editar-seccion" required>
+    
+                <label for="editar-estudiante">Estudiante:</label>
+                <input type="text" id="editar-estudiante" name="editar-estudiante" required>
+    
+                <label for="editar-nota">Nota:</label>
+                <input type="number" id="editar-nota" name="editar-nota" step="0.01" required>
+    
+                <label for="editar-nota-definitiva">Nota Definitiva:</label>
+                <input type="number" id="editar-nota-definitiva" name="editar-nota-definitiva" step="0.01" required>
+    
+                <label for="editar-estado">Estado:</label>
+                <select id="editar-estado" name="editar-estado" required>
+                    <option value="asistente">Asistente</option>
+                    <option value="inasistente">Inasistente</option>
+                    <option value="cargando">Cargando Notas</option>
+                </select>
+    
+                <button type="submit">Guardar Cambios</button>
+                <button type="button" class="cancelar" id="cancelar-editar-calificacion-modal">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <h2 class="general-tittle2"><i class="fa-solid fa-medal"></i>Calificar Asignaturas</h2>
+
+    <div class="cabecera-crud-calificar">
+        <button id="btn-ver-reporte-calificar" class="boton-crud-calificar">Ver Reporte</button>
+        <button id="btn-filtrar-calificar" class="boton-crud-calificar">Filtrar</button>
+    </div>
+
+    <div id="filtros-busqueda-calificar" class="filtros-busqueda-calificar oculto">
+        <div class="contenedor-filtros-calificar">
+            <input type="text" id="buscar-input-calificar" placeholder="Buscar Estudiante" class="buscar-input-calificar">
+            <select id="periodo-select-calificar" class="periodo-select-calificar">
+                <option value="" disabled selected>Periodo</option>
+                <option value="">Todos</option>
+                <option value="2024-1">2024-1</option>
+                <option value="2024-2">2024-2</option>
+            </select>
+            <select id="asignatura-select-calificar" class="asignatura-select-calificar">
+                <option value="" disabled selected>Asignatura</option>
+                <option value="">Todas</option>
+                <option value="mat101">Matematicas I</option>
+                <option value="fis101">Fisica I</option>
+              </select>
+              <select id="seccion-select-calificar" class="seccion-select-calificar">
+                <option value="" disabled selected>Seccion</option>
+                <option value="">Todas</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+              </select>
+        </div>
+        <div class="botones-filtro-calificar">
+            <button class="boton-filtro-calificar btn-buscar-calificar">Buscar</button>
+            <button id="btn-reajustar-calificar" class="boton-filtro-calificar btn-reajustar-calificar">Reajustar</button>
+        </div>
+    </div>
+
+    <div class="crud-calificar">
+        <main class="crud-calificar-contenedor">
+            <table id="tabla-calificar">
+                <thead>
+                    <tr>
+                        <th>Periodo</th>
+                        <th>Asignatura</th>
+                        <th>Sección</th>
+                        <th>Estudiante</th>
+                        <th>Nota</th>
+                        <th>Nota Definitiva</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024-1</td>
+                        <td>Matematicas I</td>
+                        <td>A</td>
+                        <td>(12345678) Juan Pérez</td>
+                        <td>15.00</td>
+                        <td>16.00</td>
+                        <td><span class="estado-circulo estado-asistente"></span> Asistente</td>
+                        <td>
+                            <i class="fas fa-edit accion-icono editar-icono" title="Editar"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2024-2</td>
+                        <td>Fisica I</td>
+                        <td>B</td>
+                        <td>(87654321) Maria Gómez</td>
+                        <td>12.50</td>
+                        <td>13.00</td>
+                        <td><span class="estado-circulo estado-cargando"></span> Cargando Notas</td>
+                        <td>
+                            <i class="fas fa-edit accion-icono editar-icono" title="Editar"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2024-1</td>
+                        <td>Matematicas I</td>
+                        <td>B</td>
+                        <td>(98765432) Pedro Sanchez</td>
+                        <td>05.00</td>
+                        <td>06.00</td>
+                        <td><span class="estado-circulo estado-inasistente"></span> Inasistente</td>
+                        <td>
+                            <i class="fas fa-edit accion-icono editar-icono" title="Editar"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+        <div class="paginacion-crud paginacion-calificar">
+            <button class="pagina-anterior-calificar"><i class="fas fa-chevron-left"></i></button>
+            <div class="numeros-pagina-calificar">
+                <button class="numero-pagina-calificar activo">1</button>
+                <button class="numero-pagina-calificar">2</button>
+            </div>
+            <button class="pagina-siguiente-calificar"><i class="fas fa-chevron-right"></i></button>
+            <span class="info-paginacion-calificar">1-3 de 3</span>
+        </div>
+    </div>
+
+    <script src="../js/calificar-asignaturas.js"></script>
+    <script src="../js/general-app.js"></script>
+
+    </body>
+    </html>

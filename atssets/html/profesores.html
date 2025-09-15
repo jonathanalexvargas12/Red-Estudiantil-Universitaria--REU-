@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Profesores</title>
+</head>
+<body>
+    <header>
+        <div class="header__superior">
+            <div class="logo">
+                <img src="../img/logoredu.png" alt="ReU">
+            </div>
+          
+        </div>
+    
+        <div class="container__menu">
+    <div class="menu">
+        <input type="checkbox" id="check__menu">
+        <label id="label__check" for="check__menu">
+            <i class="fa-solid fa-bars icon__menu"></i>
+        </label>
+        <nav>
+            <ul>
+              <li><a href="inicio.html">Inicio</a></li>
+              
+              <li><a href="#">Configuración</a>
+            <ul>
+                <li><a href="principal-pensum.html">Pensum</a></li>
+                <li><a href="notas-iniciales.html">Carga de notas iniciales</a></li>
+                <li><a href="bitacora.html">Bitácora</a></li>
+                <li><a href="principal-conf-general.html">General</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Control de Estudio</a>
+            <ul>
+                <li><a href="principal-ofer-academica.html">Ofertas Académicas</a></li>
+                <li><a href="inscripciones.html">Inscripciones</a></li>
+                <li><a href="principal-retiro-materias.html">Retiro de materias</a></li>
+                <li><a href="principal-carga-notas.html">Consulta y Carga de Notas</a></li>
+                <li><a href="principal-trabajos-investigacion.html">Trabajos de Investigación</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Usuarios</a>
+            <ul>
+                <li><a href="usuarios.html">Usuarios</a></li>
+                <li><a href="principal-profesores.html">Profesores</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Perfil</a>
+            <ul>
+                <li><span>Nombre de Usuario</span></li> 
+                <li><a href="mis-datos.html">Mis datos</a></li>
+                <li><a href="cambiar-contrasena.html">Cambiar contraseña</a></li>
+                <li><a href="#">Cerrar sesión <i class="fa-solid fa-right-from-bracket icon__log-out"></i></a></li>
+            </ul>
+        </li>
+    </ul>
+    </nav>
+    </div>
+    </div>
+    </header>  
+
+<div id="eliminarModal" class="modal-eliminar">
+    <div class="modal-eliminar-content">
+        <span class="eliminar-close">&times;</span>
+        <h2>¿Estás seguro de eliminar este profesor?</h2>
+        <div class="botones-modal-eliminar">
+            <button id="btn-aceptar-eliminar">Aceptar</button>
+            <button id="btn-cancelar-eliminar" class="cancelar-eliminar">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div id="editarModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Editar Profesor</h2>
+        <form id="editar-modal-form">
+            <label for="editar-cedula">Cédula:</label>
+            <input type="number" id="editar-cedula" name="editar-cedula" required>
+            <label for="editar-apellidos">Apellidos:</label>
+            <input type="text" id="editar-apellidos" name="editar-apellidos" required>
+            <label for="editar-nombres">Nombres:</label>
+            <input type="text" id="editar-nombres" name="editar-nombres" required>
+            <label for="editar-codigo">Código:</label>
+            <input type="text" id="editar-codigo" name="editar-codigo" required>
+            <label for="editar-tipo">Tipo:</label>
+            <select id="editar-tipo" name="editar-tipo" required>
+                <option value="normal">Profesor Normal</option>
+                <option value="virtual">Profesor Virtual</option>
+            </select>
+            <label for="editar-estado">Estado:</label>
+            <select id="editar-estado" name="editar-estado" required>
+                <option value="activo">Activo</option>
+                <option value="inactivo">Inactivo</option>
+            </select>
+            <button type="submit">Guardar Cambios</button>
+            <button type="button" class="cancelar" id="cancelar-editar-modal">Cancelar</button>
+        </form>
+    </div>
+</div>
+
+    <h2 class="general-tittle2"><i class="fa-solid fa-chalkboard-user"></i>Profesores</h2>
+    
+    <div class="cabecera-crud-profesores">
+        <button class="boton-crud-profesores">Filtrar</button>
+        <button class="boton-crud-profesores">Ver Reporte</button>
+    </div>
+    
+    <div class="filtros-busqueda-profesores oculto">
+        <div class="contenedor-filtros-profesores">
+            <input type="text" placeholder="Buscar" class="buscar-input-profesores">
+            <select class="tipo-select">
+                <option value="" disabled selected>Tipo</option>
+                <option value="normal">Profesor Normal</option>
+                <option value="virtual">Profesor Virtual</option>
+            </select>
+            <select class="estado-profesores-select">
+                <option value="" disabled selected>Estado</option>
+                <option value="activo">Activo</option>
+                <option value="inactivo">Inactivo</option>
+            </select>
+        </div>
+        <div class="botones-filtro-profesores">
+            <button class="boton-filtro-profesores">Buscar</button>
+            <button class="boton-filtro-profesores">Reajustar</button>
+        </div>
+    </div>
+    
+    <div class="crud-profesores">
+        <main class="contenedor-principal-profesores">
+            <table class="tabla-profesores" id="tabla-profesores">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Cédula</th>
+                        <th>Apellidos</th>
+                        <th>Nombres</th>
+                        <th>Código</th>
+                        <th>Tipo</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>12345678</td>
+                        <td>González</td>
+                        <td>Juan</td>
+                        <td>PROF001</td>
+                        <td><i class="fas fa-circle tipo-normal" title="Profesor Normal"></i></td>
+                        <td><i class="fas fa-circle estado-activo" title="Activo"></i></td>
+                        <td class="acciones-crud-profesores">
+                            <i class="fas fa-id-card" title="Ficha del Profesor"></i>
+                            <i class="fas fa-id-badge" title="Carnet"></i>
+                            <i class="fas fa-edit" title="Editar"></i>
+                            <i class="fas fa-trash" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>98765432</td>
+                        <td>Pérez</td>
+                        <td>Ana</td>
+                        <td>PROF002</td>
+                        <td><i class="fas fa-circle tipo-virtual" title="Profesor Virtual"></i></td>
+                        <td><i class="fas fa-circle estado-inactivo" title="Inactivo"></i></td>
+                        <td class="acciones-crud-profesores">
+                            <i class="fas fa-id-card" title="Ficha del Profesor"></i>
+                            <i class="fas fa-id-badge" title="Carnet"></i>
+                            <i class="fas fa-edit" title="Editar"></i>
+                            <i class="fas fa-trash" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>45678901</td>
+                        <td>Martínez</td>
+                        <td>Luis</td>
+                        <td>PROF003</td>
+                        <td><i class="fas fa-circle tipo-normal" title="Profesor Normal"></i></td>
+                        <td><i class="fas fa-circle estado-activo" title="Activo"></i></td>
+                        <td class="acciones-crud-profesores">
+                            <i class="fas fa-id-card" title="Ficha del Profesor"></i>
+                            <i class="fas fa-id-badge" title="Carnet"></i>
+                            <i class="fas fa-edit" title="Editar"></i>
+                            <i class="fas fa-trash" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>78901234</td>
+                        <td>Rodríguez</td>
+                        <td>María</td>
+                        <td>PROF004</td>
+                        <td><i class="fas fa-circle tipo-normal" title="Profesor Normal"></i></td>
+                        <td><i class="fas fa-circle estado-inactivo" title="Inactivo"></i></td>
+                        <td class="acciones-crud-profesores">
+                            <i class="fas fa-id-card" title="Ficha del Profesor"></i>
+                            <i class="fas fa-id-badge" title="Carnet"></i>
+                            <i class="fas fa-edit" title="Editar"></i>
+                            <i class="fas fa-trash" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>34567890</td>
+                        <td>Sánchez</td>
+                        <td>Pedro</td>
+                        <td>PROF005</td>
+                        <td><i class="fas fa-circle tipo-virtual" title="Profesor Vitual"></i></td>
+                        <td><i class="fas fa-circle estado-activo" title="Activo"></i></td>
+                        <td class="acciones-crud-profesores">
+                            <i class="fas fa-id-card" title="Ficha del Profesor"></i>
+                            <i class="fas fa-id-badge" title="Carnet"></i>
+                            <i class="fas fa-edit" title="Editar"></i>
+                            <i class="fas fa-trash" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>67890123</td>
+                        <td>Gómez</td>
+                        <td>Laura</td>
+                        <td>PROF006</td>
+                        <td><i class="fas fa-circle tipo-normal" title="Profesor Normal"></i></td>
+                        <td><i class="fas fa-circle estado-activo" title="Activo"></i></td>
+                        <td class="acciones-crud-profesores">
+                            <i class="fas fa-id-card" title="Ficha del Profesor"></i>
+                            <i class="fas fa-id-badge" title="Carnet"></i>
+                            <i class="fas fa-edit" title="Editar"></i>
+                            <i class="fas fa-trash" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>01234567</td>
+                        <td>Díaz</td>
+                        <td>Javier</td>
+                        <td>PROF007</td>
+                        <td><i class="fas fa-circle tipo-virtual" title="Profesor Virtual"></i></td>
+                        <td><i class="fas fa-circle estado-inactivo" title="Inactivo"></i></td>
+                        <td class="acciones-crud-profesores">
+                            <i class="fas fa-id-card" title="Ficha del Profesor"></i>
+                            <i class="fas fa-id-badge" title="Carnet"></i>
+                            <i class="fas fa-edit" title="Editar"></i>
+                            <i class="fas fa-trash" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>23456789</td>
+                        <td>López</td>
+                        <td>Isabel</td>
+                        <td>PROF008</td>
+                        <td><i class="fas fa-circle tipo-normal" title="Profesor Normal"></i></td>
+                        <td><i class="fas fa-circle estado-activo" title="Activo"></i></td>
+                        <td class="acciones-crud-profesores">
+                            <i class="fas fa-id-card" title="Ficha del Profesor"></i>
+                            <i class="fas fa-id-badge" title="Carnet"></i>
+                            <i class="fas fa-edit" title="Editar"></i>
+                            <i class="fas fa-trash" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+        <div class="paginacion-crud paginacion-profesores">
+            <button class="pagina-anterior-profesores"><i class="fas fa-chevron-left"></i></button>
+            <div class="numeros-pagina-profesores">
+                <button class="numero-pagina-profesores activo">1</button>
+                <button class="numero-pagina-profesores">2</button>
+            </div>
+            <button class="pagina-siguiente-profesores"><i class="fas fa-chevron-right"></i></button>
+            <span class="info-paginacion-profesores">1-5 de 14</span>
+        </div>
+    </div>
+
+    <script src="../js/profesores.js"></script>
+    <script src="../js/general-app.js"></script>
+
+</body>
+</html>

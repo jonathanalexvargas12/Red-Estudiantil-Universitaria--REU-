@@ -1,0 +1,8 @@
+EN EL PRESENTE ARCHIVO DE TEXTO SE PUEDEN DEJAR ANOTACIONES GENERALES ACERCA DE cAMBIOS EN EL APLICATIVO O COSAS QUE RECORDAR:
+
+1- Ya está realizado el diseño del aviso de cierre de sesión automatico, inicialmente esta oculto con CSS posteriormente con 
+backend se hará que aparezca cuando la sesión este a punto de expirar y tendrá que 
+aparecer unos cuantos segundos para dar tiempo al usuario para que extender la sesión haciendo click en "Extender Sesión"
+si asi lo desea, cada sesión durará inicialmente 10 minutos si el usuario extiende sesión se extenderá 10 minutos más.
+
+- Se realizaron cambios sutiles en el diseño general del aplicativo.

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Calificaciones Docentes</title>
+</head>
+<body>
+    <header>
+        <div class="header__superior">
+            <div class="logo">
+                <img src="../img/logoredu.png" alt="ReU">
+            </div>
+          
+        </div>
+    
+        <div class="container__menu">
+    <div class="menu">
+        <input type="checkbox" id="check__menu">
+        <label id="label__check" for="check__menu">
+            <i class="fa-solid fa-bars icon__menu"></i>
+        </label>
+        <nav>
+            <ul>
+              <li><a href="inicio.html">Inicio</a></li>
+              
+              <li><a href="#">Configuración</a>
+            <ul>
+                <li><a href="principal-pensum.html">Pensum</a></li>
+                <li><a href="notas-iniciales.html">Carga de notas iniciales</a></li>
+                <li><a href="bitacora.html">Bitácora</a></li>
+                <li><a href="principal-conf-general.html">General</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Control de Estudio</a>
+            <ul>
+                <li><a href="principal-ofer-academica.html">Ofertas Académicas</a></li>
+                <li><a href="inscripciones.html">Inscripciones</a></li>
+                <li><a href="principal-retiro-materias.html">Retiro de materias</a></li>
+                <li><a href="principal-carga-notas.html">Consulta y Carga de Notas</a></li>
+                <li><a href="principal-trabajos-investigacion.html">Trabajos de Investigación</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Usuarios</a>
+            <ul>
+                <li><a href="usuarios.html">Usuarios</a></li>
+                <li><a href="principal-profesores.html">Profesores</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Perfil</a>
+            <ul>
+                <li><span>Nombre de Usuario</span></li> 
+                <li><a href="mis-datos.html">Mis datos</a></li>
+                <li><a href="cambiar-contrasena.html">Cambiar contraseña</a></li>
+                <li><a href="#">Cerrar sesión <i class="fa-solid fa-right-from-bracket icon__log-out"></i></a></li>
+            </ul>
+        </li>
+    </ul>
+    </nav>
+    </div>
+    </div>
+    </header>  
+
+<div id="eliminarModal" class="modal-eliminar">
+    <div class="modal-eliminar-content">
+        <span class="eliminar-close">&times;</span>
+        <h2>¿Estás seguro de eliminar esta calificación?</h2>
+        <div class="botones-modal-eliminar">
+            <button id="btn-aceptar-eliminar">Aceptar</button>
+            <button id="btn-cancelar-eliminar" class="cancelar-eliminar">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div id="editarModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Editar Calificación</h2>
+        <form id="editar-modal-form">
+            <label for="editar-periodo">Periodo:</label>
+            <select id="editar-periodo" name="editar-periodo" required>
+                <option value="2023-1">2023-1</option>
+                <option value="2023-2">2023-2</option>
+            </select>
+            <label for="editar-asignatura">Asignatura:</label>
+            <select id="editar-asignatura" name="editar-asignatura" required>
+                <option value="matematica">Matemática</option>
+                <option value="historia">Historia</option>
+                <option value="ciencias">Ciencias</option>
+            </select>
+            <label for="editar-seccion">Sección:</label>
+            <input type="text" id="editar-seccion" name="editar-seccion" required>
+            <label for="editar-profesor">Profesor:</label>
+            <input type="text" id="editar-profesor" name="editar-profesor" required>
+            <label for="editar-estudiante">Estudiante:</label>
+            <input type="text" id="editar-estudiante" name="editar-estudiante" required>
+            <label for="editar-nota">Nota:</label>
+            <input type="number" id="editar-nota" name="editar-nota" step="0.01" required>
+            <button type="submit">Guardar Cambios</button>
+            <button type="button" class="cancelar" id="cancelar-editar-modal">Cancelar</button>
+        </form>
+    </div>
+</div>
+
+    <h2 class="general-tittle2"><i class="fa-solid fa-user-plus"></i>Calificaciones Docentes</h2>
+    
+    <div class="cabecera-crud-calificaciones">
+        <button class="boton-crud-calificaciones">Filtrar</button>
+        <button class="boton-crud-calificaciones">Ver Reporte</button>
+    </div>
+    
+    <div class="filtros-busqueda-calificaciones oculto">
+        <div class="contenedor-filtros-calificaciones">
+            <input type="text" placeholder="Buscar" class="buscar-input-calificaciones">
+            <select class="periodo-select">
+                <option value="" disabled selected>Periodo</option>
+                <option value="2023-1">2023-1</option>
+                <option value="2023-2">2023-2</option>
+            </select>
+            <select class="asignatura-select">
+                <option value="" disabled selected>Asignatura</option>
+                <option value="matematica">Matemática</option>
+                <option value="historia">Historia</option>
+                <option value="ciencias">Ciencias</option>
+            </select>
+        </div>
+        <div class="botones-filtro-calificaciones">
+            <button class="boton-filtro-calificaciones">Buscar</button>
+            <button class="boton-filtro-calificaciones">Reajustar</button>
+        </div>
+    </div>
+    
+    <div class="crud-calificaciones">
+        <main class="contenedor-principal-calificaciones">
+            <table class="tabla-calificaciones" id="tabla-calificaciones">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Periodo</th>
+                        <th>Asignatura</th>
+                        <th>Sección</th>
+                        <th>Profesor</th>
+                        <th>Estudiante</th>
+                        <th>Nota</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>2023-1</td>
+                        <td>Matemática</td>
+                        <td>A</td>
+                        <td>Juan González</td>
+                        <td>Pedro Sánchez</td>
+                        <td>85</td>
+                        <td class="acciones-crud-calificaciones">
+                            <i class="fas fa-edit" title="Editar"></i>
+                            <i class="fas fa-trash" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>2023-1</td>
+                        <td>Historia</td>
+                        <td>B</td>
+                        <td>Ana Pérez</td>
+                        <td>Laura Gómez</td>
+                        <td>90</td>
+                        <td class="acciones-crud-calificaciones">
+                            <i class="fas fa-edit" title="Editar"></i>
+                            <i class="fas fa-trash" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>2023-2</td>
+                        <td>Ciencias</td>
+                        <td>A</td>
+                        <td>María Rodríguez</td>
+                        <td>Javier Díaz</td>
+                        <td>78</td>
+                        <td class="acciones-crud-calificaciones">
+                            <i class="fas fa-edit" title="Editar"></i>
+                            <i class="fas fa-trash" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>2023-2</td>
+                        <td>Matemática</td>
+                        <td>B</td>
+                        <td>Luis Martínez</td>
+                        <td>Isabel López</td>
+                        <td>92</td>
+                        <td class="acciones-crud-calificaciones">
+                            <i class="fas fa-edit" title="Editar"></i>
+                            <i class="fas fa-trash" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>2023-1</td>
+                        <td>Historia</td>
+                        <td>A</td>
+                        <td>Juan González</td>
+                        <td>Pedro Sánchez</td>
+                        <td>88</td>
+                        <td class="acciones-crud-calificaciones">
+                            <i class="fas fa-edit" title="Editar"></i>
+                            <i class="fas fa-trash" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+        <div class="paginacion-crud paginacion-calificaciones">
+            <button class="pagina-anterior-calificaciones"><i class="fas fa-chevron-left"></i></button>
+            <div class="numeros-pagina-calificaciones">
+                <button class="numero-pagina-calificaciones activo">1</button>
+                <button class="numero-pagina-calificaciones">2</button>
+            </div>
+            <button class="pagina-siguiente-calificaciones"><i class="fas fa-chevron-right"></i></button>
+            <span class="info-paginacion-calificaciones">1-5 de 14</span>
+        </div>
+    </div>
+
+    <script src="../js/calif-docente.js"></script>
+    <script src="../js/general-app.js"></script>
+
+    
+</body>
+</html>
