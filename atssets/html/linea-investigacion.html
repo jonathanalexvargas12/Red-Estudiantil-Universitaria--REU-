@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Lineas de Investigación</title>
+</head>
+<body>
+    <header>
+        <div class="header__superior">
+            <div class="logo">
+                <img src="../img/logoredu.png" alt="ReU">
+            </div>
+          
+        </div>
+    
+        <div class="container__menu">
+    <div class="menu">
+        <input type="checkbox" id="check__menu">
+        <label id="label__check" for="check__menu">
+            <i class="fa-solid fa-bars icon__menu"></i>
+        </label>
+        <nav>
+            <ul>
+              <li><a href="inicio.html">Inicio</a></li>
+              
+              <li><a href="#">Configuración</a>
+            <ul>
+                <li><a href="principal-pensum.html">Pensum</a></li>
+                <li><a href="notas-iniciales.html">Carga de notas iniciales</a></li>
+                <li><a href="bitacora.html">Bitácora</a></li>
+                <li><a href="principal-conf-general.html">General</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Control de Estudio</a>
+            <ul>
+                <li><a href="principal-ofer-academica.html">Ofertas Académicas</a></li>
+                <li><a href="inscripciones.html">Inscripciones</a></li>
+                <li><a href="principal-retiro-materias.html">Retiro de materias</a></li>
+                <li><a href="principal-carga-notas.html">Consulta y Carga de Notas</a></li>
+                <li><a href="principal-trabajos-investigacion.html">Trabajos de Investigación</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Usuarios</a>
+            <ul>
+                <li><a href="usuarios.html">Usuarios</a></li>
+                <li><a href="principal-profesores.html">Profesores</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Perfil</a>
+            <ul>
+                <li><span>Nombre de Usuario</span></li> 
+                <li><a href="mis-datos.html">Mis datos</a></li>
+                <li><a href="cambiar-contrasena.html">Cambiar contraseña</a></li>
+                <li><a href="#">Cerrar sesión <i class="fa-solid fa-right-from-bracket icon__log-out"></i></a></li>
+            </ul>
+        </li>
+    </ul>
+    </nav>
+    </div>
+    </div>
+    </header>
+
+<div id="agregarLineaModal" class="modal">
+    <div class="agregar-modal-content">
+        <span class="agregar-close">×</span>
+        <h2>Agregar Nueva Línea de Investigación</h2>
+        <form id="agregar-linea-modal-form">
+            <label for="agregar-nombre-linea">Nombre de la Línea:</label>
+            <input type="text" id="agregar-nombre-linea" name="agregar-nombre-linea" required>
+
+            <label for="agregar-area-interes">Área de Interés:</label>
+            <input type="text" id="agregar-area-interes" name="agregar-area-interes" required>
+
+            <button type="submit">Agregar Línea</button>
+            <button type="button" class="cancelar-agregar" id="cancelar-agregar-linea-modal">Cancelar</button>
+        </form>
+    </div>
+</div>
+
+<div id="editarLineaModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Editar Línea de Investigación</h2>
+        <form id="editar-linea-modal-form">
+            <label for="editar-nombre-linea">Nombre de la Línea:</label>
+            <input type="text" id="editar-nombre-linea" name="editar-nombre-linea" required>
+
+            <label for="editar-area-interes">Área de Interés:</label>
+            <input type="text" id="editar-area-interes" name="editar-area-interes" required>
+
+            <button type="submit">Guardar Cambios</button>
+            <button type="button" class="cancelar" id="cancelar-editar-linea-modal">Cancelar</button>
+        </form>
+    </div>
+</div>
+
+<div id="eliminarLineaModal" class="modal">
+    <div class="modal-content">
+        <span class="eliminar-close">&times;</span>
+        <h2>¿Estás seguro de eliminar esta línea de investigación?</h2>
+        <div class="botones-modal-eliminar">
+            <button id="btn-aceptar-eliminar-linea">Aceptar</button>
+            <button id="btn-cancelar-eliminar-linea">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+
+    <div class="crud-lineas-investigacion">
+        <h2 class="general-tittle2"><i class="fa-brands fa-searchengin"></i>Líneas de Investigación</h2>
+    
+        <div class="crud-lineas-investigacion__cabecera">
+            <button id="btn-agregar-linea-investigacion" class="crud-lineas-investigacion__boton-agregar">Agregar Línea</button>
+        </div>
+    
+        <div class="crud-lineas-investigacion__filtros">
+            <div class="crud-lineas-investigacion__contenedor-filtros">
+                <input type="text" class="crud-lineas-investigacion__buscar-input" placeholder="Buscar Líneas de Investigación">
+            </div>
+            <div class="crud-lineas-investigacion__botones-filtro">
+                <button class="crud-lineas-investigacion__boton-filtro crud-lineas-investigacion__btn-buscar">Buscar</button>
+                <button class="crud-lineas-investigacion__boton-filtro crud-lineas-investigacion__btn-reajustar">Reajustar</button>
+            </div>
+        </div>
+    <div class="linea-investigacion">
+        <main class="crud-lineas-investigacion__contenedor-tabla">
+            <table id="tabla-lineas-investigacion" class="crud-lineas-investigacion__tabla">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Área de Interés</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Desarrollo de la medicina</td>
+                        <td>Medicina</td>
+                        <td>
+                            <i class="fas fa-edit crud-lineas-investigacion__accion-icono crud-lineas-investigacion__editar-icono" title="Editar"></i>
+                            <i class="fas fa-trash-alt crud-lineas-investigacion__accion-icono crud-lineas-investigacion__eliminar-icono" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Estudio de energías renovables en zonas rurales</td>
+                        <td>Energías Renovables</td>
+                        <td>
+                            <i class="fas fa-edit crud-lineas-investigacion__accion-icono crud-lineas-investigacion__editar-icono" title="Editar"></i>
+                            <i class="fas fa-trash-alt crud-lineas-investigacion__accion-icono crud-lineas-investigacion__eliminar-icono" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>3</td>
+                        <td>Análisis de Big Data para la toma de decisiones empresariales</td>
+                        <td>Big Data</td>
+                        <td>
+                            <i class="fas fa-edit crud-lineas-investigacion__accion-icono crud-lineas-investigacion__editar-icono" title="Editar"></i>
+                            <i class="fas fa-trash-alt crud-lineas-investigacion__accion-icono crud-lineas-investigacion__eliminar-icono" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                    </tbody>
+            </table>
+        </main>
+    
+        <div class="crud-lineas-investigacion__paginacion">
+            <button class="crud-lineas-investigacion__pagina-anterior"><i class="fas fa-chevron-left"></i></button>
+            <div class="crud-lineas-investigacion__numeros-pagina">
+                <button class="crud-lineas-investigacion__numero-pagina crud-lineas-investigacion__numero-pagina--activo">1</button>
+                <button class="crud-lineas-investigacion__numero-pagina">2</button>
+            </div>
+            <button class="crud-lineas-investigacion__pagina-siguiente"><i class="fas fa-chevron-right"></i></button>
+            <span class="crud-lineas-investigacion__info-paginacion">1-3 de 10</span>
+        </div>
+    </div>
+    
+    <script src="../js/linea-investigacion.js"></script>
+
+</body>
+</html>

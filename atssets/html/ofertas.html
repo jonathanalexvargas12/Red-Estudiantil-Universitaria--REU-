@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Ofertas Académicas</title>
+</head>
+<body>
+    <header>
+        <div class="header__superior">
+            <div class="logo">
+                <img src="../img/logoredu.png" alt="ReU">
+            </div>
+          
+        </div>
+    
+        <div class="container__menu">
+    <div class="menu">
+        <input type="checkbox" id="check__menu">
+        <label id="label__check" for="check__menu">
+            <i class="fa-solid fa-bars icon__menu"></i>
+        </label>
+        <nav>
+            <ul>
+              <li><a href="inicio.html">Inicio</a></li>
+              
+              <li><a href="#">Configuración</a>
+            <ul>
+                <li><a href="principal-pensum.html">Pensum</a></li>
+                <li><a href="notas-iniciales.html">Carga de notas iniciales</a></li>
+                <li><a href="bitacora.html">Bitácora</a></li>
+                <li><a href="principal-conf-general.html">General</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Control de Estudio</a>
+            <ul>
+                <li><a href="principal-ofer-academica.html">Ofertas Académicas</a></li>
+                <li><a href="inscripciones.html">Inscripciones</a></li>
+                <li><a href="principal-retiro-materias.html">Retiro de materias</a></li>
+                <li><a href="principal-carga-notas.html">Consulta y Carga de Notas</a></li>
+                <li><a href="principal-trabajos-investigacion.html">Trabajos de Investigación</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Usuarios</a>
+            <ul>
+                <li><a href="usuarios.html">Usuarios</a></li>
+                <li><a href="principal-profesores.html">Profesores</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Perfil</a>
+            <ul>
+                <li><span>Nombre de Usuario</span></li> 
+                <li><a href="mis-datos.html">Mis datos</a></li>
+                <li><a href="cambiar-contrasena.html">Cambiar contraseña</a></li>
+                <li><a href="#">Cerrar sesión <i class="fa-solid fa-right-from-bracket icon__log-out"></i></a></li>
+            </ul>
+        </li>
+    </ul>
+    </nav>
+    </div>
+    </div>
+    </header> 
+
+    <div id="agregarOfertaModal" class="modal">
+        <div class="agregar-modal-content">
+            <span class="agregar-close">&times;</span>
+            <h2>Agregar Nueva Oferta Académica</h2>
+            <form id="agregar-oferta-modal-form">
+                <label for="agregar-carrera">Carrera:</label>
+                <select id="agregar-carrera" name="agregar-carrera" required>
+                    <option value="ING">(ING) Ingeniería de Sistemas</option>
+                    <option value="ADM">(ADM) Administración</option>
+                </select>
+    
+                <label for="agregar-pensum">Pensum:</label>
+                <input type="text" id="agregar-pensum" name="agregar-pensum" required>
+    
+                <label for="agregar-periodo">Periodo:</label>
+                <select id="agregar-periodo" name="agregar-periodo" required>
+                    <option value="2024-1">2024-1</option>
+                    <option value="2024-2">2024-2</option>
+                </select>
+    
+                <label for="agregar-nivel">Nivel del Pensum:</label>
+                <input type="text" id="agregar-nivel" name="agregar-nivel" required>
+    
+                <label for="agregar-asignatura">Asignatura:</label>
+                <input type="text" id="agregar-asignatura" name="agregar-asignatura" required>
+    
+                <label for="agregar-seccion">Sección:</label>
+                <input type="text" id="agregar-seccion" name="agregar-seccion" required>
+    
+                <label for="agregar-profesor">Profesor:</label>
+                <input type="text" id="agregar-profesor" name="agregar-profesor" required>
+    
+                <label for="agregar-alumnos">N° de Alumnos:</label>
+                <input type="number" id="agregar-alumnos" name="agregar-alumnos" required>
+    
+                <label for="agregar-clases">Clases por Semana:</label>
+                <input type="number" id="agregar-clases" name="agregar-clases" required>
+    
+                <label for="agregar-estado">Estado:</label>
+                <select id="agregar-estado" name="agregar-estado" required>
+                    <option value="correcta">Cargada Correctamente</option>
+                    <option value="incorrecta">Cargada Incorrectamente</option>
+                </select>
+    
+                <button type="submit">Agregar Oferta</button>
+                <button type="button" class="cancelar-agregar" id="cancelar-agregar-oferta-modal">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="editarOfertaModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Oferta Académica</h2>
+            <form id="editar-oferta-modal-form">
+                <label for="editar-carrera">Carrera:</label>
+                <select id="editar-carrera" name="editar-carrera" required>
+                    <option value="ING">(ING) Ingeniería de Sistemas</option>
+                    <option value="ADM">(ADM) Administración</option>
+                </select>
+    
+                <label for="editar-pensum">Pensum:</label>
+                <input type="text" id="editar-pensum" name="editar-pensum" required>
+    
+                <label for="editar-periodo">Periodo:</label>
+                <select id="editar-periodo" name="editar-periodo" required>
+                    <option value="2024-1">2024-1</option>
+                    <option value="2024-2">2024-2</option>
+                </select>
+    
+                <label for="editar-nivel">Nivel del Pensum:</label>
+                <input type="text" id="editar-nivel" name="editar-nivel" required>
+    
+                <label for="editar-asignatura">Asignatura:</label>
+                <input type="text" id="editar-asignatura" name="editar-asignatura" required>
+    
+                <label for="editar-seccion">Sección:</label>
+                <input type="text" id="editar-seccion" name="editar-seccion" required>
+    
+                <label for="editar-profesor">Profesor:</label>
+                <input type="text" id="editar-profesor" name="editar-profesor" required>
+    
+                <label for="editar-alumnos">N° de Alumnos:</label>
+                <input type="number" id="editar-alumnos" name="editar-alumnos" required>
+    
+                <label for="editar-clases">Clases por Semana:</label>
+                <input type="number" id="editar-clases" name="editar-clases" required>
+    
+                <label for="editar-estado">Estado:</label>
+                <select id="editar-estado" name="editar-estado" required>
+                    <option value="correcta">Cargada Correctamente</option>
+                    <option value="incorrecta">Cargada Incorrectamente</option>
+                </select>
+    
+                <button type="submit">Guardar Cambios</button>
+                <button type="button" class="cancelar" id="cancelar-editar-oferta-modal">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="eliminarOfertaModal" class="modal">
+        <div class="modal-eliminar-content">
+            <span class="eliminar-close">&times;</span>
+            <h2>¿Estás seguro de eliminar esta oferta académica?</h2>
+            <div class="botones-modal-eliminar">
+                <button id="btn-aceptar-eliminar-oferta">Aceptar</button>
+                <button id="btn-cancelar-eliminar-oferta" class="cancelar-eliminar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="general-tittle2"><i class="fa-solid fa-book-open-reader"></i>Ofertas Académicas</h2>
+
+    <div class="cabecera-crud-ofertas">
+        <button id="btn-filtrar-ofertas" class="boton-crud-ofertas">Filtrar</button>
+        <button id="btn-agregar-oferta" class="boton-crud-ofertas">Agregar Oferta Académica</button>
+    </div>
+    
+    <div id="filtros-busqueda-ofertas" class="filtros-busqueda-ofertas">
+        <div class="contenedor-filtros-ofertas">
+            <input type="text" class="buscar-input-ofertas" placeholder="Buscar Ofertas Académicas">
+
+            <select class="select-estado-ofertas">
+                <option value="" disabled selected>Estado</option>
+                <option value="">Todos</option>
+                <option value="correcta">Cargado Correctamente</option>
+                <option value="incorrecta">Cargado Incorrectamente</option>
+            </select>
+
+            <select class="select-periodo-ofertas">
+                <option value="" disabled selected>Periodo</option>
+                <option value="">Todos</option>
+                <option value="2024-1">2024-1</option>
+                <option value="2024-2">2024-2</option>
+            </select>
+
+            <select class="select-carrera-ofertas">
+                <option value="" disabled selected>Carrera</option>
+                <option value="">Todas</option>
+                <option value="ING">(ING) Ingeniería de Sistemas</option>
+                <option value="ADM">(ADM) Administración</option>
+            </select>
+            
+            </div>
+        <div class="botones-filtro-ofertas">
+            <button class="boton-filtro-ofertas btn-buscar-ofertas">Buscar</button>
+            <button class="boton-filtro-ofertas btn-reajustar-ofertas">Reajustar</button>
+        </div>
+    </div>
+    
+    <div class="crud-ofertas">
+        <main class="crud-ofertas-contenedor">
+            <table id="tabla-ofertas">
+                <thead>
+                    <tr>
+                        <th>Carrera</th>
+                        <th>Pensum</th>
+                        <th>Periodo</th>
+                        <th>Nivel del Pensum</th>
+                        <th>Asignatura</th>
+                        <th>Sección</th>
+                        <th>Profesor</th>
+                        <th>N° de Alumnos</th>
+                        <th>Clases por Semana</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>(ING) Ingeniería de Sistemas</td>
+                        <td>P-ING-2023</td>
+                        <td>2024-1</td>
+                        <td>Segundo</td>
+                        <td>(MAT-101) Matemáticas I</td>
+                        <td>A</td>
+                        <td>12345678 (Juan Pérez)</td>
+                        <td>25</td>
+                        <td><i class="fa-solid fa-chalkboard"></i>(4)</td>
+                        <td class="estatus-oferta correcta"><span class="circulo-estatus"></span>Cargada Correctamente</td>
+                        <td>
+                            <i class="fas fa-edit accion-icono editar-icono-oferta" title="Editar"></i>
+                            <i class="fas fa-trash-alt accion-icono eliminar-icono-oferta" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>(ADM) Administración</td>
+                        <td>P-ADM-2022</td>
+                        <td>2024-2</td>
+                        <td>Tercero</td>
+                        <td>(ECO-101) Economía I</td>
+                        <td>B</td>
+                        <td>98765432 (María García)</td>
+                        <td>30</td>
+                         <td><i class="fa-solid fa-chalkboard"></i>(2)</td>
+                        <td class="estatus-oferta incorrecta"><span class="circulo-estatus"></span>Cargada Incorrectamente</td>
+                        <td>
+                            <i class="fas fa-edit accion-icono editar-icono-oferta" title="Editar"></i>
+                            <i class="fas fa-trash-alt accion-icono eliminar-icono-oferta" title="Eliminar"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    
+        <div class="paginacion-crud paginacion-ofertas">
+            <button class="pagina-anterior-ofertas"><i class="fas fa-chevron-left"></i></button>
+            <div class="numeros-pagina-ofertas">
+                <button class="numero-pagina-ofertas activo">1</button>
+                <button class="numero-pagina-ofertas">2</button>
+            </div>
+            <button class="pagina-siguiente-ofertas"><i class="fas fa-chevron-right"></i></button>
+            <span class="info-paginacion-ofertas">1-2 de 2</span>
+        </div>
+    </div>
+    
+    <script src="../js/ofertas.js"></script>
+</body>
+</html>

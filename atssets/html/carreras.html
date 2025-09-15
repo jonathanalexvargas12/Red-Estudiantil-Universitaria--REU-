@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Carreras</title>
+</head>
+<body>
+    <header>
+        <div class="header__superior">
+            <div class="logo">
+                <img src="../img/logoredu.png" alt="ReU">
+            </div>
+          
+        </div>
+    
+        <div class="container__menu">
+    <div class="menu">
+        <input type="checkbox" id="check__menu">
+        <label id="label__check" for="check__menu">
+            <i class="fa-solid fa-bars icon__menu"></i>
+        </label>
+        <nav>
+            <ul>
+              <li><a href="inicio.html">Inicio</a></li>
+              
+              <li><a href="#">Configuración</a>
+            <ul>
+                <li><a href="principal-pensum.html">Pensum</a></li>
+                <li><a href="notas-iniciales.html">Carga de notas iniciales</a></li>
+                <li><a href="bitacora.html">Bitácora</a></li>
+                <li><a href="principal-conf-general.html">General</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Control de Estudio</a>
+            <ul>
+                <li><a href="principal-ofer-academica.html">Ofertas Académicas</a></li>
+                <li><a href="inscripciones.html">Inscripciones</a></li>
+                <li><a href="principal-retiro-materias.html">Retiro de materias</a></li>
+                <li><a href="principal-carga-notas.html">Consulta y Carga de Notas</a></li>
+                <li><a href="principal-trabajos-investigacion.html">Trabajos de Investigación</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Usuarios</a>
+            <ul>
+                <li><a href="usuarios.html">Usuarios</a></li>
+                <li><a href="principal-profesores.html">Profesores</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Perfil</a>
+            <ul>
+                <li><span>Nombre de Usuario</span></li> 
+                <li><a href="mis-datos.html">Mis datos</a></li>
+                <li><a href="cambiar-contrasena.html">Cambiar contraseña</a></li>
+                <li><a href="#">Cerrar sesión <i class="fa-solid fa-right-from-bracket icon__log-out"></i></a></li>
+            </ul>
+        </li>
+    </ul>
+    </nav>
+    </div>
+    </div>
+    </header> 
+
+
+<div id="agregarCarreraModal" class="modal">
+    <div class="agregar-modal-content">
+        <span class="agregar-close">×</span>
+        <h2>Agregar Nueva Carrera</h2>
+        <form id="agregar-carrera-modal-form">
+            <label for="agregar-codigo-carrera">Código:</label>
+            <input type="text" id="agregar-codigo-carrera" name="agregar-codigo-carrera" required>
+
+            <label for="agregar-nombre-carrera">Nombre de la Carrera:</label>
+            <input type="text" id="agregar-nombre-carrera" name="agregar-nombre-carrera" required>
+
+            <button type="submit">Agregar Carrera</button>
+            <button type="button" class="cancelar-agregar" id="cancelar-agregar-carrera-modal">Cancelar</button>
+        </form>
+    </div>
+</div>
+
+<div id="editarCarreraModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Editar Carrera</h2>
+        <form id="editar-carrera-modal-form">
+            <label for="editar-codigo-carrera">Código:</label>
+            <input type="text" id="editar-codigo-carrera" name="editar-codigo-carrera" required>
+
+            <label for="editar-nombre-carrera">Nombre de la Carrera:</label>
+            <input type="text" id="editar-nombre-carrera" name="editar-nombre-carrera" required>
+
+            <button type="submit">Guardar Cambios</button>
+            <button type="button" class="cancelar" id="cancelar-editar-carrera-modal">Cancelar</button>
+        </form>
+    </div>
+</div>
+
+<div id="eliminarCarreraModal" class="modal">
+    <div class="modal-content">
+        <span class="eliminar-close">&times;</span>
+        <h2>¿Estás seguro de eliminar esta carrera?</h2>
+        <div class="botones-modal-eliminar">
+            <button id="btn-aceptar-eliminar-carrera">Aceptar</button>
+            <button id="btn-cancelar-eliminar-carrera">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+    <h2 class="general-tittle2"><i class="fas fa-graduation-cap"></i>Carreras</h2>
+
+<div class="cabecera-crud-carreras">
+    <button id="btn-agregar-carrera" class="boton-crud-carreras">Agregar Carrera</button>
+</div>
+
+<div class="filtros-busqueda-carreras">
+    <div class="contenedor-filtros-carreras">
+        <input type="text" class="buscar-input-carreras" placeholder="Buscar Carreras">
+        </div>
+    <div class="botones-filtro-carreras">
+        <button class="boton-filtro-carreras btn-buscar-carreras">Buscar</button>
+        <button class="boton-filtro-carreras btn-reajustar-carreras">Reajustar</button>
+    </div>
+</div>
+
+<div class="crud-carreras">
+    <main class="crud-carreras-contenedor">
+        <table id="tabla-carreras">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Carrera</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ING-001</td>
+                    <td>Ingeniería de Sistemas</td>
+                    <td>
+                        <i class="fas fa-edit accion-icono editar-icono-carrera" title="Editar"></i>
+                        <i class="fas fa-trash-alt accion-icono eliminar-icono-carrera" title="Eliminar"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>ADM-002</td>
+                    <td>Administración de Empresas</td>
+                    <td>
+                        <i class="fas fa-edit accion-icono editar-icono-carrera" title="Editar"></i>
+                        <i class="fas fa-trash-alt accion-icono eliminar-icono-carrera" title="Eliminar"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>MED-003</td>
+                    <td>Medicina</td>
+                    <td>
+                        <i class="fas fa-edit accion-icono editar-icono-carrera" title="Editar"></i>
+                        <i class="fas fa-trash-alt accion-icono eliminar-icono-carrera" title="Eliminar"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>DER-004</td>
+                    <td>Derecho</td>
+                    <td>
+                        <i class="fas fa-edit accion-icono editar-icono-carrera" title="Editar"></i>
+                        <i class="fas fa-trash-alt accion-icono eliminar-icono-carrera" title="Eliminar"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>ARQ-005</td>
+                    <td>Arquitectura</td>
+                    <td>
+                        <i class="fas fa-edit accion-icono editar-icono-carrera" title="Editar"></i>
+                        <i class="fas fa-trash-alt accion-icono eliminar-icono-carrera" title="Eliminar"></i>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </main>
+
+    <div class="paginacion-crud paginacion-carreras">
+        <button class="pagina-anterior-carreras"><i class="fas fa-chevron-left"></i></button>
+        <div class="numeros-pagina-carreras">
+            <button class="numero-pagina-carreras activo">1</button>
+            <button class="numero-pagina-carreras">2</button>
+        </div>
+        <button class="pagina-siguiente-carreras"><i class="fas fa-chevron-right"></i></button>
+        <span class="info-paginacion-carreras">1-5 de 14</span>
+    </div>
+</div>
+    
+
+<script src="../js/carreras.js"></script>
+</body>
+</html>

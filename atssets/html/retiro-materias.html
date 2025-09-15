@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Retiro de Materias</title>
+</head>
+<body>
+    <header>
+        <div class="header__superior">
+            <div class="logo">
+                <img src="../img/logoredu.png" alt="ReU">
+            </div>
+          
+        </div>
+    
+        <div class="container__menu">
+    <div class="menu">
+        <input type="checkbox" id="check__menu">
+        <label id="label__check" for="check__menu">
+            <i class="fa-solid fa-bars icon__menu"></i>
+        </label>
+        <nav>
+            <ul>
+              <li><a href="inicio.html">Inicio</a></li>
+              
+              <li><a href="#">Configuración</a>
+            <ul>
+                <li><a href="principal-pensum.html">Pensum</a></li>
+                <li><a href="notas-iniciales.html">Carga de notas iniciales</a></li>
+                <li><a href="bitacora.html">Bitácora</a></li>
+                <li><a href="principal-conf-general.html">General</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Control de Estudio</a>
+            <ul>
+                <li><a href="principal-ofer-academica.html">Ofertas Académicas</a></li>
+                <li><a href="inscripciones.html">Inscripciones</a></li>
+                <li><a href="principal-retiro-materias.html">Retiro de materias</a></li>
+                <li><a href="principal-carga-notas.html">Consulta y Carga de Notas</a></li>
+                <li><a href="principal-trabajos-investigacion.html">Trabajos de Investigación</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Usuarios</a>
+            <ul>
+                <li><a href="usuarios.html">Usuarios</a></li>
+                <li><a href="principal-profesores.html">Profesores</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Perfil</a>
+            <ul>
+                <li><span>Nombre de Usuario</span></li> 
+                <li><a href="mis-datos.html">Mis datos</a></li>
+                <li><a href="cambiar-contrasena.html">Cambiar contraseña</a></li>
+                <li><a href="#">Cerrar sesión <i class="fa-solid fa-right-from-bracket icon__log-out"></i></a></li>
+            </ul>
+        </li>
+    </ul>
+    </nav>
+    </div>
+    </div>
+    </header>  
+
+    <div class="contenedor-retiro-materias">
+        <div class="contenedor-retiro-materias__titulo">
+            <i class="fa-solid fa-book"></i>
+            <h2>Estudiantes, Retiro de Materias</h2>
+        </div>
+    
+        <div class="contenedor-retiro-materias__form-group">
+            <label for="buscar-estudiante" class="contenedor-retiro-materias__label">Cédula del Estudiante:</label>
+            <div class="contenedor-busqueda">
+                <input type="text" id="buscar-estudiante" class="contenedor-retiro-materias__input" placeholder="Ingrese la cédula del estudiante">
+            </div>
+        </div>
+        <button class="contenedor-retiro-materias__boton"  id="btn-continuar-retiro">Continuar</button>
+    </div>
+    <script src="../js/retiro-materias.js"></script>
+</body>
+</html>
