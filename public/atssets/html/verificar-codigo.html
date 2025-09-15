@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <script src="../js/Security_Scripts_092007.js"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Recuperar Contraseña - Paso 2</title>
+</head>
+<body class="form-recuperar">
+    <div class="contenedor-recuperacion">
+        <h2 class="titulo-recuperacion">Verificar Código</h2>
+        <form id="form-verificar-codigo">
+            <label class="label-recuperar">"Ingrese el codigo recibido en su correo"</label>
+            <br>
+            <br>
+            <div class="campo-recuperacion">
+                <label for="codigo-verificacion" class="label-recuperacion">Código de Verificación:</label>
+                <input type="text" id="codigo-verificacion"  placeholder="Código" name="codigo" class="input-recuperacion" required>
+            </div>
+            <button type="submit" class="boton-recuperacion">Verificar Código</button>
+            <div id="mensaje-codigo" class="mensaje-recuperacion"></div>
+        </form>
+    </div>
+    <script src="../js/recuperar.js"></script>
+</body>
+</html>
