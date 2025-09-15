@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Inicio</title>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/authValidation.js"></script>
+    <script src="../js/recarga_forzada.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header__superior">
+            <div class="logo">
+                <img src="../img/logoredu.png" alt="ReU">
+            </div>
+          
+        </div>
+    
+        <div class="container__menu">
+    <div class="menu">
+        <input type="checkbox" id="check__menu">
+        <label id="label__check" for="check__menu">
+            <i class="fa-solid fa-bars icon__menu"></i>
+        </label>
+        <nav>
+            <ul>
+              <li><a href="inicio.html">Inicio</a></li>
+              
+              <li><a href="#">Configuración</a>
+            <ul>
+                <li><a href="principal-pensum.html">Pensum</a></li>
+                <li><a href="notas-iniciales.html">Carga de notas iniciales</a></li>
+                <li><a href="bitacora.html">Bitácora</a></li>
+                <li><a href="principal-conf-general.html">General</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Control de Estudio</a>
+            <ul>
+                <li><a href="principal-ofer-academica.html">Ofertas Académicas</a></li>
+                <li><a href="inscripciones.html">Inscripciones</a></li>
+                <li><a href="principal-retiro-materias.html">Retiro de materias</a></li>
+                <li><a href="principal-carga-notas.html">Consulta y Carga de Notas</a></li>
+                <li><a href="principal-trabajos-investigacion.html">Trabajos de Investigación</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Usuarios</a>
+            <ul>
+                <li><a href="usuarios.html">Usuarios</a></li>
+                <li><a href="principal-profesores.html">Profesores</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Perfil</a>
+            <ul>
+                <li><span>Nombre de Usuario</span></li> 
+                <li><a href="mis-datos.html">Mis datos</a></li>
+                <li><a href="cambiar-contrasena.html">Cambiar contraseña</a></li>
+                <li><a href="/index.html">Cerrar sesión <i class="fa-solid fa-right-from-bracket icon__log-out"></i></a></li>
+            </ul>
+        </li>
+    </ul>
+    </nav>
+    </div>
+    </div>
+    </header>  
+
+
+
+<div class="container-panel">
+    <h2 class="general-tittle"><i class="fa-solid fa-home"></i>Inicio</h2>  
+    <div class="card-container">
+        <a href="inscripciones.html" class="card">
+            <div class="card-icon">
+                <i class="fa-solid fa-database"></i>
+            </div>
+            <div class="card-title">Inscripciones por validar</div>
+            <div class="card-count">14</div>
+        </a>
+        <a href="../html/principal-trabajos-investigacion.html" class="card">
+            <div class="card-icon">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
+            <div class="card-title">Trabajos de Investigación</div>
+            <div class="card-count"></div>
+        </a>
+        <a href="../html/principal-conf-general.html" class="card">
+            <div class="card-icon">
+                <i class="fa-solid fa-id-badge"></i>
+            </div>
+            <div class="card-title">Carnetización</div>
+            <div class="card-count"></div>
+        </a>
+        <a href="#" id="card-inscripciones-cobrar" class="card">
+            <div class="card-icon">
+                <i class="fa-solid fa-credit-card"></i>
+            </div>
+            <div class="card-title">Inscripciones por cobrar</div>
+            <div class="card-count">5.256,36</div>
+        </a>
+    </div>
+</div>
+
+<div id="modal-overlay-inscripciones-cobrar">
+    <div id="modal-content-inscripciones-cobrar">
+        <div id="modal-header-inscripciones-cobrar">
+            <span class="modal-title">Inscripciones por cobrar</span>
+            <span id="modal-close-inscripciones-cobrar">&times;</span>
+        </div>
+        <p>Para la activación de este módulo por favor comunicarse con el equipo de ReU</p>
+        <p><i class="fa-brands fa-telegram"></i>(412) 000 00 00</p>
+        <p><i class="fa-brands fa-whatsapp"></i>(412) 000 00 00</p>
+    </div>
+</div>
+<main class="principal-contenido">
+    <section class="indicador-calificaciones">
+        <h2 class="indicador-titulo"><i class="fas fa-tasks"></i> Asignaturas por Calificar <span class="indicador-contador" id="contador-calificaciones">140</span></h2>
+        <div class="grafico-barras" id="grafico-calificaciones">
+            <div class="barra-total" style="height: 200px;"></div>
+            <div class="barra-pendiente" style="height: 100px;"></div>
+        </div>
+        <a href="../html/notas-por-calificar.html" class="boton-ver" id="boton-ver-calificaciones">Ver Asignaturas</a>
+    </section>
+
+    <section class="indicador-inscripciones-pendientes">
+        <h2 class="indicador-titulo"><i class="fas fa-user-plus"></i> Inscripciones por Validar <span class="indicador-contador" id="contador-inscripciones-pendientes">14</span></h2>
+        <div class="grafico-barras" id="grafico-inscripciones-pendientes">
+            <div class="barra-total" style="height: 150px;"></div>
+            <div class="barra-pendiente" style="height: 20px;"></div>
+        </div>
+        <a href="../html/inscripciones.html" class="boton-ver" id="boton-ver-inscripciones-pendientes">Ver Inscripciones</a>
+    </section>
+
+    <section class="indicador-inscripciones-validadas">
+        <h2 class="indicador-titulo"><i class="fas fa-user-check"></i> Inscripciones Validadas <span class="indicador-contador" id="contador-inscripciones-validadas">130</span></h2>
+        <div class="grafico-barras" id="grafico-inscripciones-validadas">
+            <div class="barra-validadas" style="height: 130px;"></div>
+        </div>
+    </section>
+</main>
+
+<script src="../js/inicio.js"></script>
+<script src="../js/general-app.js"></script>
+
+
+</body>
+</html>
