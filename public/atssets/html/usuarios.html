@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Usuarios</title>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/authValidation.js"></script>
+    <script src="../js/Security_Scripts_092007.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header__superior">
+            <div class="logo">
+                <img src="../img/logoredu.png" alt="ReU">
+            </div>
+          
+        </div>
+    
+        <div class="container__menu">
+    <div class="menu">
+        <input type="checkbox" id="check__menu">
+        <label id="label__check" for="check__menu">
+            <i class="fa-solid fa-bars icon__menu"></i>
+        </label>
+        <nav>
+            <ul>
+              <li><a href="inicio.html">Inicio</a></li>
+              
+              <li><a href="#">Configuración</a>
+            <ul>
+                <li><a href="principal-pensum.html">Pensum</a></li>
+                <li><a href="notas-iniciales.html">Carga de notas iniciales</a></li>
+                <li><a href="bitacora.html">Bitácora</a></li>
+                <li><a href="principal-conf-general.html">General</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Control de Estudio</a>
+            <ul>
+                <li><a href="principal-ofer-academica.html">Ofertas Académicas</a></li>
+                <li><a href="inscripciones.html">Inscripciones</a></li>
+                <li><a href="principal-retiro-materias.html">Retiro de materias</a></li>
+                <li><a href="principal-carga-notas.html">Consulta y Carga de Notas</a></li>
+                <li><a href="principal-trabajos-investigacion.html">Trabajos de Investigación</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Usuarios</a>
+            <ul>
+                <li><a href="usuarios.html">Usuarios</a></li>
+                <li><a href="principal-profesores.html">Profesores</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Perfil</a>
+            <ul>
+                <li><span id="username">Nombre de Usuario</span></li> 
+                <li><a href="mis-datos.html">Mis datos</a></li>
+                <li><a href="cambiar-contrasena.html">Cambiar contraseña</a></li>
+                <li><a href="/index.html">Cerrar sesión <i class="fa-solid fa-right-from-bracket icon__log-out"></i></a></li>
+            </ul>
+        </li>
+    </ul>
+    </nav>
+    </div>
+    </div>
+    </header> 
+
+    <div id="agregarModal" class="modal">
+        <div class="agregar-modal-content">
+            <span class="agregar-close">&times;</span>
+            <h2>Agregar Usuario</h2>
+            <form id="agregar-modal-form">
+                <label for="nueva-cedula">Cédula:</label>
+                <input type="number" id="nueva-cedula" name="nueva-cedula" required>
+                <label for="nuevos-nombres">Nombres:</label>
+                <input type="text" id="nuevos-nombres" name="nuevos-nombres" required>
+                <label for="nuevos-apellidos">Apellidos:</label>
+                <input type="text" id="nuevos-apellidos" name="nuevos-apellidos" required>
+                <label for="nuevo-pensum">Pensum:</label>
+                <input type="text" id="nuevo-pensum" name="nuevo-pensum" required>
+                <label for="nuevo-estado">Estado:</label>
+                <select id="nuevo-estado" name="nuevo-estado" required>
+                    <option value="habilitado">Habilitado</option>
+                    <option value="deshabilitado">Deshabilitado</option>
+                </select>
+                <button type="submit">Guardar</button>
+                <button type="button" class="cancel ar-agregar" id="cancelar-agregar-modal">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="editarModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Usuario</h2>
+            <form id="modal-form">
+                <label for="cedula">Cédula:</label>
+                <input type="number" id="cedula" name="cedula" required>
+                <label for="nombres">Nombres:</label>
+                <input type="text" id="nombres" name="nombres" required>
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" required>
+                <label for="pensum">Pensum:</label>
+                <input type="text" id="pensum" name="pensum" required>
+                <label for="estado">Estado:</label>
+                <select id="estado" name="estado" required>
+                    <option value="habilitado">Habilitado</option>
+                    <option value="deshabilitado">Deshabilitado</option>
+                </select>
+                <button type="submit">Guardar</button>
+                <button type="button" class="cancelar" id="cancelar-modal">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modalAnular" class="modal-anular">
+        <div class="modal-anular-content">
+            <span class="close-anular">&times;</span>
+            <h2>¿Estás seguro de anular este registro?</h2>
+            <div class="botones-modal-anular">
+                <button id="btn-aceptar-anular">Aceptar</button>
+                <button id="btn-cancelar-anular" class="cancelar-anular">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cambiarContrasenaModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Cambiar Contraseña</h2>
+            <form id="cambiar-contrasena-form">
+                <label for="nueva-contrasena">Nueva Contraseña:</label>
+                <input type="password" id="nueva-contrasena" name="nueva-contrasena" required>
+                <label for="confirmar-contrasena">Confirmar Contraseña:</label>
+                <input type="password" id="confirmar-contrasena" name="confirmar-contrasena" required>
+                <button type="submit">Cambiar</button>
+                <button type="button" class="cancelar" id="cancelar-cambiar-contrasena">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <h2 class="general-tittle2"><i class="fa-solid fa-users"></i>Usuarios</h2>
+
+    <div class="cabecera-crud-usuarios">
+        <button id="btn-agregar-usuarios" class="boton-crud-usuarios">Agregar Usuario</button>
+    </div>
+    
+    <div id="filtros-busqueda-usuarios" class="filtros-busqueda-usuarios">
+        <div class="contenedor-filtros-usuarios">
+            <input type="text" class="buscar-input-usuarios" placeholder="Buscar Usuarios">
+
+            <select class="select-estado-usuarios">
+                <option value="" disabled selected>Estado</option>
+                <option value="">Todos</option>
+                <option value="habilitado">Habilitado</option>
+                <option value="desabilitad">Deshabilitado</option>
+            </select>
+
+            <select class="select-ordenar-usuarios">
+                <option value="" disabled selected>Ordenar</option>
+                <option value="">Todos</option>
+                <option value="cedula">Cedula</option>
+                <option value="nombre">Nombre</option>
+                <option value="apellido">Apellido</option>
+            </select>
+                </div>
+
+            <div class="filtro-radio-usuarios">
+                <label><input type="radio" name="orden" value="ascendente" checked> Ascendente</label>
+                <label><input type="radio" name="orden" value="descendente"> Descendente</label>
+            </div>
+        <div class="botones-filtro-usuarios">
+            <button class="boton-filtro-usuarios btn-buscar-usuarios">Buscar</button>
+            <button class="boton-filtro-usuarios btn-reajustar-usuarios">Reajustar</button>
+        </div>
+     
+        </div>
+    
+        <div class="crud-usuarios-contenedor">
+            <table id="tabla-usuarios" class="tabla-usuarios">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Cédula</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Pensum</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     <tr>
+                        <td>1</td>
+                        <td>12345678</td>
+                        <td>Ejemplo</td>
+                        <td>Usuario</td>
+                        <td><i class="fas fa-circle pensum-asignado" title="Asignado"></i></td>
+                        <td><i class="fas fa-circle estado-habilitado" title="Habilitado"></i></td>
+                        <td>
+                            <i class="fas fa-edit accion-icono editar-icono-usuario" title="Editar"></i>
+                            <i class="fas fa-key accion-icono cambiar-contrasena-icono-usuario" title="Cambiar Contraseña"></i>
+                            <i class="fas fa-trash-alt accion-icono anular-icono-usuario" title="Anular"></i>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>87654321</td>
+                        <td>Ejemplo 2</td>
+                        <td>Usuario 2</td>
+                        <td><i class="fas fa-circle pensum-no-asignado" title="No Asignado"></i></td>
+                        <td><i class="fas fa-circle estado-deshabilitado" title="Deshabilitado"></i></td>
+                        <td>
+                            <i class="fas fa-edit accion-icono editar-icono-usuario" title="Editar"></i>
+                            <i class="fas fa-key accion-icono cambiar-contrasena-icono-usuario" title="Cambiar Contraseña"></i>
+                            <i class="fas fa-trash-alt accion-icono anular-icono-usuario" title="Anular"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <div class="paginacion-crud paginacion-usuarios">
+            <button class="pagina-anterior-usuarios"><i class="fas fa-chevron-left"></i></button>
+            <div class="numeros-pagina-usuarios">
+                <button class="numero-pagina-usuarios activo">1</button>
+                <button class="numero-pagina-usuarios">2</button>
+            </div>
+            <button class="pagina-siguiente-usuarios"><i class="fas fa-chevron-right"></i></button>
+            <span class="info-paginacion-usuarios">1-6 de 6</span>
+        </div>
+    </div>
+
+    <script src="../js/usuarios.js"></script>
+    <script src="../js/general-app.js"></script>
+
+</body>
+</html>
