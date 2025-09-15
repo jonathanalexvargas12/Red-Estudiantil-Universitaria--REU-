@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Consultar Oferta Académica</title>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/authValidation.js"></script>
+    <script src="../js/recarga_forzada.js"></script>
+    <script src="../js/Security_Scripts_092007.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header__superior">
+            <div class="logo">
+                <img src="../img/logoredu.png" alt="ReU">
+            </div>
+          
+        </div>
+    
+        <div class="container__menu">
+    <div class="menu">
+        <input type="checkbox" id="check__menu">
+        <label id="label__check" for="check__menu">
+            <i class="fa-solid fa-bars icon__menu"></i>
+        </label>
+        <nav>
+            <ul>
+              <li><a href="inicio.html">Inicio</a></li>
+              
+              <li><a href="#">Configuración</a>
+            <ul>
+                <li><a href="principal-pensum.html">Pensum</a></li>
+                <li><a href="notas-iniciales.html">Carga de notas iniciales</a></li>
+                <li><a href="bitacora.html">Bitácora</a></li>
+                <li><a href="principal-conf-general.html">General</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Control de Estudio</a>
+            <ul>
+                <li><a href="principal-ofer-academica.html">Ofertas Académicas</a></li>
+                <li><a href="inscripciones.html">Inscripciones</a></li>
+                <li><a href="principal-retiro-materias.html">Retiro de materias</a></li>
+                <li><a href="principal-carga-notas.html">Consulta y Carga de Notas</a></li>
+                <li><a href="principal-trabajos-investigacion.html">Trabajos de Investigación</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Usuarios</a>
+            <ul>
+                <li><a href="usuarios.html">Usuarios</a></li>
+                <li><a href="principal-profesores.html">Profesores</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Perfil</a>
+            <ul>
+                <li><span>Nombre de Usuario</span></li> 
+                <li><a href="mis-datos.html">Mis datos</a></li>
+                <li><a href="cambiar-contrasena.html">Cambiar contraseña</a></li>
+                <li><a href="/index.html">Cerrar sesión <i class="fa-solid fa-right-from-bracket icon__log-out"></i></a></li>
+            </ul>
+        </li>
+    </ul>
+    </nav>
+    </div>
+    </div>
+    </header>  
+    
+    <div class="contenedor-consulta-oferta">
+        <div class="contenedor-consulta-oferta__titulo">
+            <i class="fa-solid fa-clipboard-list"></i>
+            <h2>Consultar Oferta Académica</h2>
+        </div>
+        <div class="contenedor-consulta-oferta__form-group">
+            <label for="carrera" class="contenedor-consulta-oferta__label">Carrera</label>
+            <select id="carrera" class="contenedor-consulta-oferta__select">
+                <option value="" disabled selected>Seleccione una Carrera</option>
+                <option value="ing">Ingeniería de Sistemas</option>
+                <option value="adm">Administración</option>
+                <option value="cont">Contaduría Pública</option>
+                </select>
+        </div>
+        <div class="contenedor-consulta-oferta__form-group">
+            <label for="pensum" class="contenedor-consulta-oferta__label">Pensum</label>
+            <select id="pensum" class="contenedor-consulta-oferta__select">
+                <option value="" disabled selected>Seleccione un Pensum</option>
+                <option value="p-ing-2023">P-ING-2023</option>
+                <option value="p-adm-2022">P-ADM-2022</option>
+                </select>
+        </div>
+        <div class="contenedor-consulta-oferta__form-group">
+            <label for="periodo" class="contenedor-consulta-oferta__label">Periodo</label>
+            <select id="periodo" class="contenedor-consulta-oferta__select">
+                <option value="" disabled selected>Seleccione un Periodo</option>
+                <option value="2023-1">2023-1</option>
+                <option value="2023-2">2023-2</option>
+                <option value="2024-1">2024-1</option>
+                </select>
+        </div>
+
+        <button class="contenedor-consulta-oferta__boton">Ver Reporte</button>
+ 
+        <script src="../js/general-app.js"></script>
+
+</body>
+</html>
