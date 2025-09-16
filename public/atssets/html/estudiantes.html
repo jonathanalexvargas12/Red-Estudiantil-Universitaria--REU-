@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Estudiantes</title>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/authValidation.js"></script>
+    <script src="../js/recarga_forzada.js"></script>
+    <script src="../js/Security_Scripts_092007.js"></script>
+    <script type="module" src="../js/estudiantes.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header__superior">
+            <div class="logo">
+                <img src="../img/logoredu.png" alt="ReU">
+            </div>
+          
+        </div>
+    
+        <div class="container__menu">
+    <div class="menu">
+        <input type="checkbox" id="check__menu">
+        <label id="label__check" for="check__menu">
+            <i class="fa-solid fa-bars icon__menu"></i>
+        </label>
+        <nav>
+            <ul>
+              <li><a href="inicio.html">Inicio</a></li>
+              
+              <li><a href="#">Configuración</a>
+            <ul>
+                <li><a href="principal-pensum.html">Pensum</a></li>
+                <li><a href="notas-iniciales.html">Carga de notas iniciales</a></li>
+                <li><a href="bitacora.html">Bitácora</a></li>
+                <li><a href="principal-conf-general.html">General</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Control de Estudio</a>
+            <ul>
+                <li><a href="principal-ofer-academica.html">Ofertas Académicas</a></li>
+                <li><a href="inscripciones.html">Inscripciones</a></li>
+                <li><a href="principal-retiro-materias.html">Retiro de materias</a></li>
+                <li><a href="principal-carga-notas.html">Consulta y Carga de Notas</a></li>
+                <li><a href="principal-trabajos-investigacion.html">Trabajos de Investigación</a></li>
+            </ul>
+        </li>
+              <li><a href="#">Usuarios</a>
+            <ul>
+                <li><a href="usuarios.html">Usuarios</a></li>
+                <li><a href="principal-profesores.html">Profesores</a></li>
+                <li><a href="estudiantes.html">Estudiantes</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Perfil</a>
+            <ul>
+                <li><span id="username">Nombre de Usuario</span></li> 
+                <li><a href="mis-datos.html">Mis datos</a></li>
+                <li><a href="cambiar-contrasena.html">Cambiar contraseña</a></li>
+                <li><a href="/index.html">Cerrar sesión <i class="fa-solid fa-right-from-bracket icon__log-out"></i></a></li>
+            </ul>
+        </li>
+    </ul>
+    </nav>
+    </div>
+    </div>
+    </header>  
+
+    <div id="editarModalEstudiantes" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Estudiante</h2>
+            <form id="editar-modal-form-estudiantes">
+                <label for="editar-cedula-estudiante">Cédula:</label>
+                <input type="text" id="editar-cedula-estudiante" name="editar-cedula-estudiante" required>
+                
+                <label for="editar-apellidos-estudiante">Apellidos:</label>
+                <input type="text" id="editar-apellidos-estudiante" name="editar-apellidos-estudiante" required>
+                
+                <label for="editar-nombres-estudiante">Nombres:</label>
+                <input type="text" id="editar-nombres-estudiante" name="editar-nombres-estudiante" required>
+    
+                <label for="editar-carrera-estudiante">Carrera:</label>
+                <select id="editar-carrera-estudiante" name="editar-carrera-estudiante" required>
+                    <option value="">Cargando carreras...</option>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
+                
+                <label for="editar-pensum-estudiante">Pensum:</label>
+                <select id="editar-pensum-estudiante" name="editar-pensum-estudiante" required>
+                    <option value="asignado">Asignado</option>
+                    <option value="pendiente">Pendiente</option>
+                </select>
+                
+                <label for="editar-estado-estudiante">Estado:</label>
+                <select id="editar-estado-estudiante" name="editar-estado-estudiante" required>
+                    <option value="regular">Estudiante Regular</option>
+                    <option value="nuevo-ingreso">Nuevo Ingreso</option>
+                </select>
+                
+                <div class="modal-buttons">
+                    <button type="submit" class="btn-guardar">Guardar Cambios</button>
+                    <button type="button" class="cancelar" id="cancelar-editar-modal-estudiantes">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <h2 class="general-tittle2"><i class="fa-solid fa-user-graduate"></i>Estudiantes</h2>
+    
+    <div class="cabecera-crud-estudiantes">
+        <button class="boton-crud-estudiantes">Filtrar</button>
+        <button class="boton-crud-estudiantes">Ver Reporte</button>
+    </div>
+    
+    <div class="filtros-busqueda-estudiantes oculto">
+        <div class="contenedor-filtros-estudiantes">
+            <input type="text" placeholder="Buscar" class="buscar-input-estudiantes">
+            <select class="estado-select">
+                <option value="" disabled selected>Estado</option>
+                <option value="regular">Estudiante Regular</option>
+                <option value="nuevo-ingreso">Nuevo Ingreso</option>
+            </select>
+        </div>
+        <div class="botones-filtro-estudiantes">
+            <button class="boton-filtro-estudiantes">Buscar</button>
+            <button class="boton-filtro-estudiantes">Reajustar</button>
+        </div>
+    </div>
+    
+    <div class="crud-estudiantes">
+        <main class="contenedor-principal-estudiantes">
+            <table class="tabla-estudiantes" id="tabla-estudiantes">
+                <thead>
+                    <tr>
+                        <th>Cédula</th>
+                        <th>Apellidos</th>
+                        <th>Nombres</th>
+                        <th>Pensum</th>
+                        <th>Estado</th>
+                        <th>Carnet</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                               <!-- Las filas se llenarán dinámicamente con JavaScript -->
+
+                </tbody>
+            </table>
+        </main>
+        <div class="paginacion-crud paginacion-estudiantes">
+            <button class="pagina-anterior-estudiantes"><i class="fas fa-chevron-left"></i></button>
+            <div class="numeros-pagina-estudiantes">
+                <button class="numero-pagina-estudiantes activo">1</button>
+                <button class="numero-pagina-estudiantes">2</button>
+            </div>
+            <button class="pagina-siguiente-estudiantes"><i class="fas fa-chevron-right"></i></button>
+            <span class="info-paginacion-estudiantes">1-5 de 14</span>
+        </div>
+    </div>
+    
+
+</body>
+</html>
