@@ -1,0 +1,107 @@
+EN EL PRESENTE ARCHIVO DE TEXTO SE PUEDEN DEJAR ANOTACIONES GENERALES ACERCA DE CAMBIOS EN EL APLICATIVO:
+
+Resumen General
+* Fue creado un archivo llamado "server.js" para ejecutar un servidor local con node.js.
+* El sistema frontend fue movido a una nueva carpeta llamada "public".
+* Fue creada una carpeta llamada "src" donde se manejar la logica del backend.
+* En la carpeta src se crearon archivos para establecer la conexion del sistema con la base de datos y adicionalmente un sistema de conttrol de sesiones con Json Web Tokens con una duracion de 10 minutos, adicional a eso se establecieron roles para identificar al tipo de usuario y se le añadieron restricciones en el sistema.
+* Se añadieron archivos a la carpeta js para gestionar los tokens y conectar el login con el backend.
+* La mayoria de archivos html fueron vinculados al decodificador de jwt y al modulo de seguimiento de sesion.
+
+****Notas importantes****
+- Para que el sistema funcione se debe configurar el modulo db.js ubicado en src/config con los datos de la conexion con la base de datos.
+- Para que el sistema funcione correctame la versión de "MariaDB" que se debe de utilizar es la "11.9.2 Rolling" o superior de lo contrario el sistema dara error
+
+Librerias y dependencias utilizadas:
++-- body-parser@1.20.3
++-- crypto@1.0.1
++-- express@4.21.2
++-- jsonwebtoken@9.0.2
++-- jwt-decode@4.0.0
++-- mariadb@3.4.0
+`-- refresh-token@1.0.0
++-- jspdf
+
+Nueva Estructura:
+App Web Reu/
+├── server.js
+├── public/
+│   ├── index.html
+│   ├── atssets/
+│   │   ├── html/
+│   │   ├── css/
+│   │   ├── js/
+│   │   │    ├──login.js
+│   │   │    ├──tokenManager.js.js
+│   │   │    └──authValidation.js
+│   │   └── img/
+├── src/
+│   ├── config/
+│   │   └── db.js
+│   ├── controllers/
+│   │   └── authController.js
+│   ├── middlewares/
+│   │   └── checkJWT.js
+│   ├── routes/
+│   │   └── authRoutes.js
+│   ├── utils/
+│   │   └── generateJWT.js
+
+Funcion de nuevos archivos:
+* login.js: 
+	- Envia el correo y contraseña al backend. 
+	- Recibe un token JWT, el rol del usuario y las rutas permitidas guardandolas en el `localStorage` del navegador.
+
+* authValidation.js: 
+	- Verifica si hay un token, un rol y rutas permitidas en `localStorage`.
+	- Compara la ruta actual con las rutas permitidas para el rol del usuario.
+	- Redirige al usuario al login si no tiene permiso o si el token ha expirado.
+
+* tokenManager.js:
+	- Verifica el tiempo restante antes de que el token expire.
+	- Muestra una alerta 2 minutos antes de la expiración.
+	- Redirige automáticamente al login cuando el token expira.
+	- Elimina el token, el rol y las rutas permitidas de `localStorage` al expirar.
+
+* db.js:
+	- Configuracion de la conexion de la base de datos.
+
+
+* authController.js:
+	- Recibe el coreo y contraseña del archivo login.js y los valida en la base de datos.
+	- Genera un token JWT si los datos son correctas.
+	- Devuelve el token y el rol del usuario al frontend.
+	- Maneja la renovación del token cuando está a punto de expirar.
+
+* checkJWT.js:
+	- Extrae el token del encabezado de la solicitud.
+	- Verifica si el token es válido y no ha expirado.
+	- Añade la información del usuario decodificada para su uso en otras rutas.
+
+
+* authRoutes.js:
+	- Define la ruta `/login` para el inicio de sesión.
+	- Define la ruta `/allowed-routes` para obtener las rutas permitidas según el rol del usuario.
+	- Define la ruta `/refresh-token` para renovar el token JWT.
+
+* generateJWT.js:
+- Recibe los datos del usuario (ID y rol).
+- Firma el token con una clave secreta.
+- Establece un tiempo de expiración de 10 minutos para el token.
+
+
+
+Notas importantes para corregir en futuras versiones:
+* Añadir alertas en el inicio de sesion, actualmente solo existe la alerta "Error en el Servidor" se deben crear dos alertas adicionales que indiquen si el correo o la contraseña es incorrecta para facilitar la identificacion de errores.
+* Se debe crear un modulo para crear usuarios reservado solo para administradores que incluya el cifrado de contraseña (y aplicar la interpretacion en los modulos que lo requieran)
+* Crear una interfaz adaptable al rol recibido para mostrar unicamente los modulos permitidos y mantener la logica de restricciones actual para garantizar la seguridad
+* Corregir detalles de las alertas de aviso de cierre de sesion, la ultima alerta debe aparecer cuando ya la sesion se haya cerrado automaticamente.
+* Ocultar el codigo fuente de la consola para garantizar la seguridad.
+* Corregir el codigo repetido donde se renuevan los tokens.
+* Implementar base de datos de ejemplo.
+* Agregar detalles minimos en cuanto al diseño grafico.
+* Realizar un modulo en el apartado de estudiantes para que se puedan reinscribir de manera automatizada e independiente, sus datos personales no se solicitarán ya que se extraerán de la bae de datos (solo se hará editable los campos de número de telefono 1 y 2, por si se quisiera cambiar en la nueva reinscripción), solo seleccionarán el nuevo periodo y las unidades curriculares con sus respectivas unidades de creidito que deseen inscribir para el siguiente periodo y que dicho modulo este activo o inactivo a eleccion manual del usuario responsable de habilitar o deshabilitar el modulo de inscripciones.
+* Hacer que cada que se incluya un nuevo usuario en la base de datos y en el sistema como tal, a este se le genere una contraseña de acceso alfanumerica, unica y de manera 100% autoamtizada, que será enviada a su correo electronica (la inclusión de nuevos usuarios no tendrá un apartado grafico, se hará netamente desde el manejador de base de datos).
+* Recordar que en el apartado de aulas, si dicha aula es presencial su capacidad maxima será de 20 estudiantes, en caso de ser virtual será de 30 estudiantes.
+* En el rol "Docente o Profesor", se manejrán de manera interna 4 subroles ("Docente Presencial FIJO, Docente Temporal SOLO POR UNOS SEMESTRES, Docente Acesor de PROYECTO O METODOLOGIA, Docente Tutor"), estos 4 roles solo serán interrnos graficamente se segurán manejando como hasta ahora.
+* Mejorar la Generación de Reportes y diversos documentos PDF en ciertos apartados del aplicativo.
