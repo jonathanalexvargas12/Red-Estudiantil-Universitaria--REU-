@@ -1,0 +1,21 @@
+SISTEMA DE NIVELES ACADÉMICOS — ESTADO ACTUAL Y PLAN
+=====================================================
+
+1. Lo que existe hoy
+   - nivel_pensum: tabla plana (Trayecto I, II, III, IV — o Trimestres según datos).
+     Sin agrupar por categoría.
+   - carreras.Tipo: campo inconsistente (Trimestral/Semestral, Pregrado/Postgrado).
+   - principal-pensum.html: hub con Carreras, Asignaturas, Niveles, Pensum.
+     Sin filtro por nivel académico.
+
+2. Lo que NO existe
+   - No hay columna nivel_academico en ninguna tabla.
+   - No hay navegación ni selector para cambiar entre niveles.
+   - Los términos primaria, bachillerato, posgrado no aparecen en el código.
+
+3. Propuesta de implementación
+   a. BD: Agregar nivel_academico a carreras (o tabla maestra).
+   b. BD: Agregar Nivel_Academico a nivel_pensum para agrupar niveles.
+   c. CRUD: Página para gestionar niveles académicos.
+   d. Filtro global: Selector en el header para filtrar todo el sistema.
+   e. Seed data: Poblarlo con ejemplos (Primaria, Bachillerato, Universitario, Posgrado).

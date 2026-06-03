@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Asistencia Docente</title>
+    <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    <script type="module" src="../js/asistencia.js"></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <h2 class="general-tittle2"><i class="fa-solid fa-clipboard-check"></i>Asistencia Docente</h2>
+
+    <div class="info-docente-asistencia" id="info-docente">
+        <p><strong>Docente:</strong> <span id="docente-nombre">-</span></p>
+        <p><strong>Fecha:</strong> <span id="fecha-actual">-</span></p>
+        <p><strong>Día:</strong> <span id="dia-actual">-</span></p>
+    </div>
+
+    <div class="cabecera-crud-asistencia">
+        <button id="btn-recargar" class="boton-crud-asistencia"><i class="fas fa-sync"></i> Recargar</button>
+        <button id="btn-ver-reporte" class="boton-crud-asistencia"><i class="fas fa-file-alt"></i> Ver Reporte</button>
+    </div>
+
+    <div class="crud-asistencia">
+        <main class="contenedor-principal-asistencia">
+            <table class="tabla-asistencia" id="tabla-asistencia">
+                <thead>
+                    <tr>
+                        <th>Hora Desde</th>
+                        <th>Hora Hasta</th>
+                        <th>Asignatura</th>
+                        <th>Sección</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Se llena dinámicamente con JavaScript -->
+                </tbody>
+            </table>
+        </main>
+        <div class="paginacion-crud paginacion-asistencia">
+            <button class="pagina-anterior-asistencia"><i class="fas fa-chevron-left"></i></button>
+            <div class="numeros-pagina-asistencia">
+                <button class="numero-pagina-asistencia activo">1</button>
+            </div>
+            <button class="pagina-siguiente-asistencia"><i class="fas fa-chevron-right"></i></button>
+            <span class="info-paginacion-asistencia">0 registros</span>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div id="confirmarModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Confirmar Asistencia</h2>
+            <p id="confirmar-mensaje">¿Desea marcar asistencia para esta clase?</p>
+            <div class="botones-modal-eliminar">
+                <button id="btn-confirmar-si">Sí, marcar asistencia</button>
+                <button id="btn-confirmar-no" class="cancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

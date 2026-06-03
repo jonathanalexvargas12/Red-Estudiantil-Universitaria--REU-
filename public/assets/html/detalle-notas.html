@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Detalle, Notas Historicas</title>
+    <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    </head>
+<body>
+    <div id="header-placeholder"></div>
+<div class="contenedor-detalle-notas">
+        <div class="contenedor-detalle-notas__titulo">
+            <i class="fas fa-user-graduate"></i> 
+            <h2>Detalle de Notas del Estudiante</h2>
+        </div>
+        <div id="datos-estudiante-notas"></div>
+        <div class="contenedor-detalle-notas__titulo">
+            <i class="fas fa-list-ul"></i>
+            <h2>Histórico de Notas</h2>
+        </div>
+        <div id="notas-estudiante"></div>
+        <button id="btn-generar-reporte-notas"><i class="fas fa-file-pdf"></i>Generar Reporte</button>
+    </div>
+
+    <script src="../js/detalle-notas.js"></script>
+    </body>
+</html>

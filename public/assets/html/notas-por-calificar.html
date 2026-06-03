@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Notas por Calificar</title>
+    <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    </head>
+<body>
+    <div id="header-placeholder"></div>
+<div class="notas-por-calificar">
+        <div class="notas-por-calificar__titulo">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <h2>Notas por calificar</h2>
+        </div>
+        <div class="notas-por-calificar__form-group">
+            <label for="notas-por-calificar" class="notas-por-calificar__label">Periodo</label>
+            <select id="period-notas-calificar" class="period-notas-calificar">
+                <option value="" disabled selected>Seleccione</option>
+                <option value="">Todos</option>
+                <option value="2024-1">2024-1</option>
+                <option value="2024-2">2024-2</option>
+            </select>
+        </div>
+        <button class="notas-calificar__boton">Reporte de Notas por calificar</button>
+    </div>
+
+    </body>
+</html>

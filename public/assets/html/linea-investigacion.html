@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Líneas de Investigación</title>
+    <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    <script type="module" src="../js/linea-investigacion.js"></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <div id="agregarLineaModal" class="modal">
+        <div class="modal-content">
+            <span class="agregar-close">&times;</span>
+            <h2>Agregar Línea de Investigación</h2>
+            <form id="agregar-linea-form">
+                <div class="form-group">
+                    <label for="agregar-codigo-linea">Código:</label>
+                    <input type="text" id="agregar-codigo-linea" required>
+                </div>
+                <div class="form-group">
+                    <label for="agregar-nombre-linea">Nombre:</label>
+                    <input type="text" id="agregar-nombre-linea" required>
+                </div>
+                <div class="form-group">
+                    <label for="agregar-descripcion-linea">Descripción:</label>
+                    <textarea id="agregar-descripcion-linea" rows="3" class="input-recuperacion"></textarea>
+                </div>
+                <button type="submit">Agregar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="editarLineaModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Línea de Investigación</h2>
+            <form id="editar-linea-form">
+                <div class="form-group">
+                    <label for="editar-codigo-linea">Código:</label>
+                    <input type="text" id="editar-codigo-linea" required>
+                </div>
+                <div class="form-group">
+                    <label for="editar-nombre-linea">Nombre:</label>
+                    <input type="text" id="editar-nombre-linea" required>
+                </div>
+                <div class="form-group">
+                    <label for="editar-descripcion-linea">Descripción:</label>
+                    <textarea id="editar-descripcion-linea" rows="3" class="input-recuperacion"></textarea>
+                </div>
+                <button type="submit">Guardar Cambios</button>
+                <button type="button" class="cancelar" id="cancelar-editar-linea">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="eliminarLineaModal" class="modal">
+        <div class="modal-content">
+            <span class="eliminar-close">&times;</span>
+            <h2>¿Estás seguro de eliminar esta línea de investigación?</h2>
+            <div class="botones-modal-eliminar">
+                <button id="btn-aceptar-eliminar-linea">Aceptar</button>
+                <button id="btn-cancelar-eliminar-linea">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-panel">
+        <h2 class="general-tittle"><i class="fa-solid fa-flask"></i> Líneas de Investigación</h2>
+
+        <div class="cabecera-crud-asignaturas">
+            <button id="btn-agregar-linea" class="boton-crud-asignaturas">Agregar Línea</button>
+        </div>
+
+        <div class="crud-asignaturas">
+            <main class="crud-asignaturas-contenedor">
+                <table id="tabla-lineas">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </main>
+
+            <div class="paginacion-crud">
+                <button class="pagina-anterior"><i class="fas fa-chevron-left"></i></button>
+                <div class="numeros-pagina"></div>
+                <button class="pagina-siguiente"><i class="fas fa-chevron-right"></i></button>
+                <span class="info-paginacion"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/linea-investigacion.js"></script>
+</body>
+</html>

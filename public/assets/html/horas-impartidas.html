@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Horas Impartidas</title>
+   <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    <script type="module" src="../js/horas-impartidas.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+<body>
+    <div id="header-placeholder"></div>
+<h2 class="general-tittle2"><i class="fa-solid fa-user-clock"></i>Horas Impartidas por Docente</h2>
+    
+    <div class="cabecera-crud-horas-impartidas">
+        <button class="boton-crud-horas-impartidas">Filtrar</button>
+        <button class="boton-crud-horas-impartidas" id="boton-crud-horas-impartidas">Ver Reporte</button>
+        <a href="asistencia.html" class="boton-crud-horas-impartidas" style="text-decoration:none; display:inline-flex; align-items:center;"><i class="fas fa-clipboard-check"></i> Marcar Asistencia</a>
+    </div>
+    
+    <div class="filtros-busqueda-horas-impartidas oculto">
+        <div class="contenedor-filtros-horas-impartidas">
+            <input type="text" placeholder="Buscar" class="buscar-input-horas-impartidas">
+            <select class="periodo-select">
+                <option value="" disabled selected>Periodo</option>
+                <option value="2023-1">2023-1</option>
+                <option value="2023-2">2023-2</option>
+            </select>
+            <select class="asignatura-select">
+                <option value="" disabled selected>Asignatura</option>
+                <option value="matematica">Matemática</option>
+                <option value="historia">Historia</option>
+                <option value="ciencias">Ciencias</option>
+            </select>
+        </div>
+        <div class="botones-filtro-horas-impartidas">
+            <button class="boton-filtro-horas-impartidas">Buscar</button>
+            <button class="boton-filtro-horas-impartidas">Reajustar</button>
+        </div>
+    </div>
+    
+    <div class="crud-horas-impartidas">
+        <main class="contenedor-principal-horas-impartidas">
+            <table class="tabla-horas-impartidas" id="tabla-horas-impartidas">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Periodo</th>
+                        <th>Asignatura</th>
+                        <th>Sección</th>
+                        <th>Profesor</th>
+                        <th>N° de horas impartidas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                
+                </tbody>
+            </table>
+        </main>
+        <div class="paginacion-crud paginacion-horas-impartidas">
+            <button class="pagina-anterior-horas-impartidas"><i class="fas fa-chevron-left"></i></button>
+            <div class="numeros-pagina-horas-impartidas">
+                <button class="numero-pagina-horas-impartidas activo">1</button>
+                <button class="numero-pagina-horas-impartidas">2</button>
+            </div>
+            <button class="pagina-siguiente-horas-impartidas"><i class="fas fa-chevron-right"></i></button>
+            <span class="info-paginacion-horas-impartidas">1-5 de 14</span>
+        </div>
+    </div>
+
+    
+</body>
+</html>

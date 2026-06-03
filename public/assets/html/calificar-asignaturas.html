@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Calificar Asignaturas</title>
+    <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    <script type="module" src="../js/calificar-asignaturas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+<div id="editarCalificacionModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Calificación</h2>
+            <form id="editar-calificacion-modal-form">
+                <label for="editar-periodo">Periodo:</label>
+                <select id="editar-periodo" name="editar-periodo" required>
+                    <!-- Opciones se cargarán dinámicamente -->
+                </select>
+    
+                <label for="editar-asignatura">Asignatura:</label>
+                <select id="editar-asignatura" name="editar-asignatura" required>
+                    <!-- Opciones se cargarán dinámicamente -->
+                </select>
+    
+                <label for="editar-seccion">Sección:</label>
+                <select id="editar-seccion" name="editar-seccion" required>
+                    <!-- Opciones se cargarán dinámicamente -->
+                </select>
+    
+                <label for="editar-cedula-estudiante">Cédula Estudiante:</label>
+                <input type="text" id="editar-cedula-estudiante" name="editar-cedula-estudiante" required>
+    
+                <label for="editar-estudiante">Estudiante:</label>
+                <input type="text" id="editar-estudiante" name="editar-estudiante" required>
+    
+                <label for="editar-nota">Nota:</label>
+                <input type="number" id="editar-nota" name="editar-nota" step="0.01" required>
+    
+                <label for="editar-nota-definitiva">Nota Definitiva:</label>
+                <input type="number" id="editar-nota-definitiva" name="editar-nota-definitiva" step="0.01" required>
+    
+                <label for="editar-estado">Estado:</label>
+                <select id="editar-estado" name="editar-estado" required>
+                    <option value="asistente">Asistente</option>
+                    <option value="inasistente">Inasistente</option>
+                    <option value="cargando notas">Cargando Notas</option>
+                </select>
+    
+                <button type="submit">Guardar Cambios</button>
+                <button type="button" class="cancelar" id="cancelar-editar-calificacion-modal">Cancelar</button>
+            </form>
+        </div>
+    </div>
+    <h2 class="general-tittle2"><i class="fa-solid fa-medal"></i>Calificar Asignaturas</h2>
+
+    <div class="cabecera-crud-calificar">
+        <button id="btn-filtrar-calificar" class="boton-crud-calificar">Filtrar</button>
+        <button id="btn-ver-reporte-calificar" class="boton-crud-calificar">Ver Reporte</button>
+    </div>
+
+    <div id="filtros-busqueda-calificar" class="filtros-busqueda-calificar oculto">
+        <div class="contenedor-filtros-calificar">
+            <input type="text" id="buscar-input-calificar" placeholder="Buscar Estudiante" class="buscar-input-calificar">
+            
+            <select id="periodo-select-calificar" class="periodo-select-calificar">
+                <option value="" disabled selected>Periodo</option>
+                <option value="">Todos</option>
+                <!-- Opciones se cargarán dinámicamente -->
+            </select>
+            
+            <select id="asignatura-select-calificar" class="asignatura-select-calificar">
+                <option value="" disabled selected>Asignatura</option>
+                <option value="">Todas</option>
+                <!-- Opciones se cargarán dinámicamente -->
+            </select>
+            
+            <select id="seccion-select-calificar" class="seccion-select-calificar">
+                <option value="" disabled selected>Seccion</option>
+                <option value="">Todas</option>
+                <!-- Opciones se cargarán dinámicamente -->
+            </select>
+        </div>
+        
+        <div class="botones-filtro-calificar">
+            <button class="boton-filtro-calificar btn-buscar-calificar">Buscar</button>
+            <button id="btn-reajustar-calificar" class="boton-filtro-calificar btn-reajustar-calificar">Reajustar</button>
+        </div>
+    </div>
+
+    <div class="crud-calificar">
+        <main class="crud-calificar-contenedor">
+            <table id="tabla-calificar">
+                <thead>
+                    <tr>
+                        <th>Periodo</th>
+                        <th>Asignatura</th>
+                        <th>Sección</th>
+                        <th>Cedula Estudiante</th>
+                        <th>Estudiante</th>
+                        <th>Nota</th>
+                        <th>Nota Definitiva</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <!-- Las filas se llenarán dinámicamente con JavaScript -->
+
+                </tbody>
+            </table>
+        </main>
+        <div class="paginacion-crud paginacion-calificar">
+            <button class="pagina-anterior-calificar"><i class="fas fa-chevron-left"></i></button>
+            <div class="numeros-pagina-calificar">
+                <button class="numero-pagina-calificar activo">1</button>
+                <button class="numero-pagina-calificar">2</button>
+            </div>
+            <button class="pagina-siguiente-calificar"><i class="fas fa-chevron-right"></i></button>
+            <span class="info-paginacion-calificar">1-3 de 3</span>
+        </div>
+    </div>
+
+
+    </body>
+    </html>

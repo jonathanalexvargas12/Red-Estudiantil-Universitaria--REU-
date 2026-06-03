@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Notas Historicas</title>
+    <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    </head>
+<body>
+    <div id="header-placeholder"></div>
+<div class="contenedor-notas-historicas">
+        <div class="contenedor-notas-historicas__titulo">
+            <i class="fa-regular fa-address-book"></i>
+            <h2>Estudiantes, Notas Históricas</h2>
+        </div>
+
+        <div class="contenedor-notas-historicas__form-group">
+            <label for="buscar-estudiante-notas" class="contenedor-notas-historicas__label">Cédula del Estudiante:</label>
+            <div class="contenedor-busqueda">
+                <input type="text" id="buscar-estudiante-notas" class="contenedor-notas-historicas__input" placeholder="Ingrese la cédula del estudiante">
+            </div>
+        </div>
+
+        <button class="contenedor-notas-historicas__boton" id="btn-continuar-notas">Continuar</button>
+    </div>
+    <script src="../js/notas-historicas.js"></script>
+    </body>
+</html>

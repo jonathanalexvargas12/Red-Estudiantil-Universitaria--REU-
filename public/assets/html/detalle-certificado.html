@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Detalle, Notas Historicas</title>
+    <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    </head>
+<body>
+    <div id="header-placeholder"></div>
+<div class="contenedor-detalle-certificado">
+        <div class="contenedor-detalle-certificado__titulo">
+         <i class="fas fa-file-alt"></i>
+            <h2>Certificado de Notas</h2>
+        </div>
+        <div id="datos-estudiante-certificado">
+            <div class="contenedor-detalle-certificado__subtitulo">
+                <i class="fas fa-user-graduate"></i>
+                <h3>Datos del Estudiante</h3>
+            </div>
+            <div id="datos-estudiante-info"></div> </div>
+        <div class="contenedor-detalle-certificado__titulo">
+            <i class="fas fa-list-ul"></i>
+            <h2>Materias Aprobadas</h2>
+        </div>
+        <div id="materias-aprobadas"></div>
+        <button id="btn-generar-certificado"><i class="fas fa-file-pdf"></i>Generar Certificado</button>
+    </div>
+    <script src="../js/detalle-certificado.js"></script>
+    </body>
+</html>

@@ -1,0 +1,379 @@
+================================================================================
+                     ANÁLISIS COMPLETO DEL PROYECTO
+            Red Estudiantil Universitaria (REU) - App Web REU
+                          Versión 1.0.0
+================================================================================
+
+1. DESCRIPCIÓN GENERAL
+================================================================================
+
+Aplicación web full-stack para la gestión de una red estudiantil universitaria.
+El sistema administra inscripciones, reinscripciones, calificaciones, horarios,
+asistencia docente, tutorías, trabajos de investigación y generación de
+certificados/records académicos para una institución educativa venezolana.
+
+Roles del sistema:
+  - Administrador
+  - Docente (con 4 subroles internos: Presencial Fijo, Temporal, Asesor de
+    Proyecto/Metodología, Tutor)
+  - Estudiante
+  - Administrativo
+  - Control_de_Estudios
+  - Tutor_Externo
+
+
+2. TECH STACK
+================================================================================
+
+Backend:
+  - Node.js (runtime)
+  - Express.js 4.21.2 (framework web)
+  - MariaDB 11.9.2 Rolling+ (base de datos)
+  - mariadb 3.4.0 (conector)
+  - JWT (jsonwebtoken 9.0.2) con expiración de 5 minutos
+  - bcrypt 6.0.0 (hash de contraseñas, 10 rounds)
+  - dotenv 17.4.2 (variables de entorno)
+
+Frontend:
+  - HTML5 + CSS3 + JavaScript vanilla (ES Modules)
+  - Google Fonts (Roboto)
+  - Font Awesome 6 (iconos)
+  - Tom Select 2.3.1 (selectores mejorados, CDN)
+  - jsPDF (generación de PDF, CDN)
+
+Dependencias npm:
+  - bcrypt ^6.0.0
+  - body-parser ^1.20.3
+  - crypto ^1.0.1
+  - dotenv ^17.4.2
+  - express ^4.21.2
+  - jsonwebtoken ^9.0.2
+  - jwt-decode ^4.0.0
+  - mariadb ^3.4.0
+  - refresh-token ^1.0.0
+
+
+3. ESTRUCTURA DEL DIRECTORIO
+================================================================================
+
+/
+├── server.js                        # Punto de entrada del servidor Express
+├── package.json                     # Configuración del proyecto
+├── .env                             # Variables de entorno (DB, JWT, Puerto)
+├── .gitignore                       # node_modules/ y .env ignorados
+├── leer.txt                         # Notas de desarrollo
+├── migracion-horas-columnas.sql     # Migración de columna en tabla horas
+│
+├── public/                          # Frontend (archivos estáticos)
+│   ├── index.html                   # Página de login
+│   └── assets/
+│       ├── css/
+│       │   └── estilo.css           # 1624 líneas - estilos globales
+│       ├── html/                    # 48 páginas HTML
+│       │   ├── inicio.html          # Dashboard con KPIs
+│       │   ├── header.html          # Barra de navegación compartida
+│       │   ├── estudiantes.html     # Gestión de estudiantes
+│       │   ├── profesores.html      # Gestión de profesores
+│       │   ├── asignaturas.html     # Gestión de materias
+│       │   ├── inscripciones.html   # Proceso de inscripción
+│       │   ├── reinscripcion.html   # Proceso de reinscripción
+│       │   ├── pensum.html          # Plan de estudios (pensum)
+│       │   ├── gestion-horarios.html# Gestión de horarios
+│       │   ├── asistencia.html      # Asistencia docente
+│       │   ├── calificar-asignaturas.html  # Calificaciones
+│       │   ├── notas-historicas.html       # Historial de notas
+│       │   ├── record-academico.html       # Record académico
+│       │   ├── trabajos-investigacion.html # Trabajos de investigación
+│       │   ├── bitacora.html        # Auditoría del sistema
+│       │   ├── usuarios.html        # Gestión de usuarios
+│       │   ├── aulas.html           # Gestión de aulas
+│       │   ├── secciones.html       # Gestión de secciones
+│       │   ├── periodos.html        # Periodos académicos
+│       │   ├── ofertas.html         # Ofertas académicas
+│       │   ├── carreras.html        # Gestión de carreras
+│       │   ├── horas-impartidas.html # Reporte de horas
+│       │   ├── solicitar-tutoria.html # Solicitud de tutoría
+│       │   ├── tutor-externo.html   # Gestión de tutores externos
+│       │   └── ... (otras páginas)
+│       ├── js/                      # 41 archivos JS frontend
+│       │   ├── login.js             # Lógica de autenticación
+│       │   ├── tokenManager.js      # Monitoreo de expiración de JWT
+│       │   ├── shared.js            # Header compartido y validación de rutas
+│       │   ├── jwt-decode.js        # Decodificador JWT client-side
+│       │   ├── genericTable.js      # Componente de tabla CRUD reutilizable
+│       │   ├── paginacion.js        # Componente de paginación
+│       │   ├── inicio.js            # Dashboard
+│       │   ├── estudiantes.js       # CRUD estudiantes
+│       │   ├── profesores.js        # CRUD profesores
+│       │   ├── usuarios.js          # CRUD usuarios
+│       │   └── ... (un JS por página HTML)
+│       └── img/                     # 12 imágenes (logos, iconos, fondos)
+│
+├── src/                             # Backend
+│   ├── config/
+│   │   └── db.js                    # Pool de conexión MariaDB (5 conexiones)
+│   ├── controllers/
+│   │   ├── authController.js        # Login y refresh de tokens
+│   │   └── genericController.js     # CRUD genérico para todas las tablas
+│   ├── middlewares/
+│   │   └── checkJWT.js              # Middleware de verificación JWT
+│   ├── routes/
+│   │   ├── authRoutes.js            # Rutas de autenticación + permisos por rol
+│   │   └── crudRoutes.js            # CRUD + endpoints de negocio
+│   ├── services/
+│   │   ├── asistenciaService.js     # Marcado de asistencia docente
+│   │   ├── CalificacionService.js   # Cálculo y sincronización de notas
+│   │   ├── DashboardService.js      # KPIs del dashboard
+│   │   ├── HorarioService.js        # Consultas de horarios
+│   │   ├── InscripcionService.js    # Inscripción de estudiantes
+│   │   ├── InvestigacionService.js  # Tutorías e investigación
+│   │   └── ReinscripcionService.js  # Reinscripción de estudiantes
+│   └── utils/
+│       ├── bitacora.js              # Registro de auditoría
+│       └── generateJWT.js           # Generación de tokens JWT
+│
+└── scripts/                         # Scripts de base de datos y utilidades
+    ├── init-db.sql                  # Creación de tabla bitácora y migraciones
+    ├── init-db.js                   # Script Node para inicializar DB
+    ├── old_data.sql                 # Datos de ejemplo/legado
+    ├── import-old-data.js           # Importador inteligente de datos viejos
+    ├── importar-sql.js              # Importación de SQL externo
+    ├── regenerar-sql.js             # Generación de datos de prueba masivos
+    ├── migrar-contrasenas.js        # Migración de contraseñas a bcrypt
+    ├── migrar-relaciones.js         # Migración de relaciones y FK
+    └── actualizar-html.js           # Actualización batch de HTML
+
+
+4. ESTADÍSTICAS DEL CÓDIGO
+================================================================================
+
+Categoría              Archivos    Líneas de Código
+---------------------  ----------  ----------------
+Backend (src/)          15          ~1,841
+Frontend JS             41          ~13,422
+HTML                    48          4,438
+CSS                     1           1,624
+SQL migraciones         4           ~138
+Scripts Node.js         8           ~1,600
+Config (JSON)           2           1,551
+--------------------------------------------------
+TOTAL (aprox.)          140         ~24,588+ líneas
+(Excluye node_modules/ y .git/)
+
+
+5. BASE DE DATOS
+================================================================================
+
+Nombre: reu_db
+Motor: MariaDB 11.9.2 Rolling+
+Pool: 5 conexiones máximas
+
+Tablas identificadas (22+):
+
+  Tabla                       PK                  Propósito
+  --------------------------- ------------------  ------------------------------
+  usuarios                    ID_Usuario          Usuarios del sistema (todos
+                                                  los roles), contraseñas
+                                                  hasheadas, códigos de carnet
+  estudiantes                 Cedula              Datos específicos de
+                                                  estudiantes, linked a usuarios
+  docentes                    Cedula              Datos específicos de
+                                                  docentes, linked a usuarios
+  carreras                    Codigo_Carrera      Programas académicos/carreras
+  pensum                      Codigo_Pensum       Definiciones de pensum
+  nivel_pensum                Nombre_Nivel        Niveles académicos (Trayecto
+                                                  I-IV, Trimestres)
+  asignaturas                 Codigo_Asignatura   Materias/unidades curriculares
+  aulas                       Nombre_Aula         Aulas con capacidad
+  secciones                   Codigo_Seccion      Secciones/grupos
+  periodo_academico           Periodo_Academico   Periodos (ej. "2026-1")
+  horas                       ID                  Sesiones de clase (horario)
+  docente_asignatura          ID                  Asignación profesor-materia
+                                                  (oferta académica)
+  estudiantes_asignatura      ID                  Inscripción estudiante-materia
+                                                  con notas
+  estudiante_periodo_academico ID                 Inscripción por periodo con
+                                                  datos de pago
+  calificaciones              ID                  Calificaciones sincronizadas
+                                                  desde estudiantes_asignatura
+  reinscripciones             ID                  Registros de reinscripción
+  asistencia_docente          ID                  Asistencia de docentes
+  trabajo_investigacion       ID                  Proyectos de investigación/
+                                                  tesis
+  tutores_externos            Cedula              Tutores externos
+  solicitudes_tutor_interno   ID                  Solicitudes de tutor interno
+  solicitudes_tutor_externo   ID                  Solicitudes de tutor externo
+  bitacora                    ID                  Registro de auditoría de
+                                                  todas las operaciones
+
+Relaciones clave:
+  - usuarios.ID_Usuario → estudiantes.Usuario / docentes.Usuario
+  - estudiantes.Carrera → carreras.Codigo_Carrera
+  - horas.Docente_Cedula → docentes.Cedula
+  - horas.Asignatura → asignaturas.Codigo_Asignatura
+  - docente_asignatura.Docente_Cedula → docentes.Cedula
+  - estudiantes_asignatura.Estudiante_Cedula → estudiantes.Cedula
+
+
+6. API ENDPOINTS
+================================================================================
+
+Autenticación (/auth/*):
+  POST   /auth/login                          Login (email+password) → JWT
+  GET    /auth/allowed-routes                  Rutas permitidas según rol
+  POST   /auth/refresh-token                   Renovar JWT
+  POST   /auth/registrar-bitacora              Registrar entrada en bitácora
+
+CRUD Genérico (/api/:table):
+  GET    /api/:table                           Listar todos los registros
+  POST   /api/:table                           Crear registro
+  PUT    /api/:table/:id                       Actualizar registro
+  DELETE /api/:table/:id                       Eliminar registro
+  (Tablas soportadas: asignaturas, aulas, horas, secciones, periodo_academico,
+   carreras, nivel_pensum, trabajo_investigacion, estudiantes, docentes,
+   pensum, calificaciones, solicitudes_tutor_interno, solicitudes_tutor_externo,
+   estudiante_periodo_academico, estudiantes_asignatura, docente_asignatura,
+   usuarios, bitacora, reinscripciones, asistencia_docente, tutores_externos)
+
+Endpoints de Negocio:
+  PUT    /api/usuarios/cambiar-contrasena/:id   Cambio de contraseña
+  POST   /api/usuarios                          Crear usuario (con pass y carnet)
+  POST   /api/reinscripciones                   Registrar reinscripción simple
+  GET    /api/asistencia/horario/:cedula        Horario completo del docente
+  GET    /api/asistencia/horario-hoy/:cedula    Horario del día del docente
+  POST   /api/asistencia/marcar                 Marcar asistencia
+  GET    /api/asistencia/reporte                Reporte de horas impartidas
+  GET    /api/asistencia/verificar              Verificar asistencia existente
+  DELETE /api/asistencia/:id                    Eliminar asistencia
+  POST   /api/solicitudes/aceptar-interna/:id   Aceptar tutoría interna
+  POST   /api/solicitudes/aceptar-externa/:id   Aprobar tutoría externa
+  GET    /api/inscripcion/materias-disponibles  Materias disponibles
+  POST   /api/inscripcion-completa              Inscripción completa
+  PUT    /api/estudiantes_asignatura/:id        Actualizar nota + sincronizar
+  GET    /api/ofertas/:id/horario               Horario de una oferta
+  GET    /api/horario/docente/:cedula           Horario por docente+filtro
+  GET    /api/reinscripcion/datos-previos/:cedula Datos previos del estudiante
+  POST   /api/reinscripcion-completa            Reinscripción completa
+  GET    /api/dashboard                         KPIs del dashboard
+
+
+7. MÓDULOS PRINCIPALES Y RESPONSABILIDADES
+================================================================================
+
+Backend:
+
+  - authController:     Login con verificación bcrypt, generación y refresh de
+                        tokens JWT (expiración 5 min)
+  - genericController:  CRUD dinámico para 22 tablas con auditoría automática,
+                        JOINs especializados para tablas con relaciones
+  - checkJWT:           Middleware que valida JWT en cada request protegido
+  - asistenciaService:  Gestión de asistencia docente: marcar, verificar,
+                        reportes de horas impartidas
+  - CalificacionService:Sincronización de notas entre estudiantes_asignatura
+                        y calificaciones, cálculo de estado (>=10 = Aprobado)
+  - DashboardService:   KPIs: estudiantes activos, docentes activos,
+                        calificaciones pendientes, ofertas activas,
+                        estudiantes por carrera
+  - HorarioService:     Consultas de horarios por oferta académica o por
+                        docente
+  - InscripcionService: Inscripción completa: valida datos, registra periodo,
+                        asigna materias
+  - ReinscripcionService:Reinscripción con avance de nivel, sugiere siguiente
+                        nivel académico
+  - InvestigacionService:Manejo de tutorías internas/externas, creación de
+                        trabajos de investigación
+  - bitacora:           Auditoría: registra hora, fecha, IP, usuario, acción,
+                        módulo, ID de registro y detalles de cada operación
+  - generateJWT:        Genera tokens JWT con payload {id, rol}
+
+Frontend:
+
+  - login.js:           Autenticación, almacena token/rol/rutas en localStorage,
+                        registra bitácora de inicio de sesión
+  - tokenManager.js:    Monitorea expiración del JWT, alerta 2 min antes,
+                        redirige al login al expirar
+  - shared.js:          Inyección de header compartido, validación de rutas,
+                        bloqueo de herramientas de desarrollador para no-admins,
+                        inicialización de Tom Select
+  - genericTable.js:    Componente reutilizable para CRUD: carga datos,
+                        renderiza tabla, acciones (editar/eliminar/ver carnet)
+  - paginacion.js:      Componente de paginación de tablas
+  - inicio.js:          Dashboard con indicadores gráficos
+
+
+8. SEGURIDAD
+================================================================================
+
+  - JWT con expiración de 5 minutos para todas las API (excepto login)
+  - Contraseñas hasheadas con bcrypt (10 rounds)
+  - Contraseñas auto-generadas de 8 caracteres alfanuméricos para nuevos
+    usuarios
+  - Control de acceso basado en roles (whitelist de rutas por rol)
+  - Bloqueo de herramientas de desarrollador (F12, Ctrl+Shift+I/J/C/U,
+    clic derecho) para usuarios no administradores
+  - Registro de IP del cliente en todas las operaciones (header x-client-ip
+    + API externa ipify)
+  - Auditoría completa (bitácora) de toda operación Crear/Actualizar/Eliminar
+
+
+9. ARQUITECTURA Y PATRONES
+================================================================================
+
+  - Generic Controller Pattern: Un solo controlador maneja CRUD para todas
+    las tablas del sistema, reduciendo código repetitivo
+  - Desnormalización controlada: Varias tablas almacenan nombres completos
+    junto a las FK para evitar JOINs frecuentes
+  - Sincronización bidireccional de notas: estudiantes_asignatura se
+    sincroniza automáticamente con calificaciones
+  - Validación dual: Frontend valida rutas desde localStorage + Backend
+    valida JWT en cada request
+  - Códigos de carnet únicos: EST-XXX para estudiantes, PROF-XXX para
+    docentes (3 dígitos aleatorios)
+
+
+10. CONFIGURACIÓN DEL ENTORNO (.env)
+================================================================================
+
+  PORT=3007
+  DB_HOST=localhost
+  DB_USER=root
+  DB_PASSWORD=babaire2026*
+  DB_NAME=reu_db
+  DB_PORT=3306
+  JWT_SECRET=reu_system
+  JWT_EXPIRES_IN=5m
+
+
+11. NOTAS DE DESARROLLO (de leer.txt)
+================================================================================
+
+Mejoras planificadas para futuras versiones:
+  - Alertas diferenciadas en login (correo incorrecto vs contraseña incorrecta)
+  - Módulo de reinscripción automatizada para estudiantes
+  - Envío de contraseñas auto-generadas por correo electrónico
+  - Activación/desactivación manual del módulo de inscripciones
+  - Capacidad de aulas: 20 presencial, 30 virtual
+  - Mejora de generación de reportes PDF
+  - Corrección de alertas de cierre de sesión
+  - Ocultar código fuente de consola
+
+
+12. SCRIPTS DE UTILIDAD (scripts/)
+================================================================================
+
+  init-db.sql / init-db.js        Crear tabla bitácora y migraciones
+  old_data.sql                    Datos de ejemplo
+  import-old-data.js              Importar datos legacy con mapeo de
+                                  columnas
+  importar-sql.js                 Importar base de datos desde SQL externo
+  regenerar-sql.js                Generar datos de prueba masivos
+                                  (seed=42, determinista)
+  migrar-contrasenas.js           Migrar contraseñas en texto plano a bcrypt
+  migrar-relaciones.js            Crear todas las FK entre tablas
+  actualizar-html.js              Actualización batch de HTML para header
+                                  compartido
+
+
+================================================================================
+                      FIN DEL ANÁLISIS
+================================================================================

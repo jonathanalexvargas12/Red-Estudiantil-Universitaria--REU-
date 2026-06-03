@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Inscripciones por Cobrar</title>
+    <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    <script type="module" src="../js/inscripciones-cobrar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <h2 class="general-tittle2"><i class="fa-solid fa-credit-card"></i> Inscripciones por Cobrar</h2>
+
+    <div class="cabecera-crud">
+        <span class="total-registros" id="total-pendientes">Pendientes: —</span>
+    </div>
+
+    <div id="filtros-busqueda" class="filtros-busqueda oculto">
+        <div class="contenedor-filtros">
+            <input type="text" id="buscar-input" placeholder="Buscar estudiante..." class="buscar-input">
+            <select id="pago-select" class="estado-select">
+                <option value="">Todos</option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Procesando">Procesando</option>
+                <option value="Aprobado">Aprobado</option>
+            </select>
+            <button class="boton-crud" id="btn-buscar"><i class="fa-solid fa-search"></i></button>
+            <button class="boton-crud" id="btn-reajustar"><i class="fa-solid fa-rotate-left"></i></button>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table id="tabla-cobros">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Estudiante</th>
+                    <th>Cédula</th>
+                    <th>Carrera</th>
+                    <th>Periodo</th>
+                    <th>Monto</th>
+                    <th>Moneda</th>
+                    <th>Pago</th>
+                    <th>Fecha Registro</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-cobros-body"></tbody>
+        </table>
+    </div>
+
+    <div class="paginacion-crud">
+        <button class="pagina-anterior"><i class="fas fa-chevron-left"></i></button>
+        <div class="numeros-pagina"></div>
+        <button class="pagina-siguiente"><i class="fas fa-chevron-right"></i></button>
+        <span class="info-paginacion"></span>
+    </div>
+
+    <div id="modal-conciliar" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">Conciliar Pago</span>
+                <span class="modal-close" id="modal-close-conciliar">&times;</span>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="conciliar-id">
+                <p><strong>Estudiante:</strong> <span id="conciliar-estudiante"></span></p>
+                <p><strong>Cédula:</strong> <span id="conciliar-cedula"></span></p>
+                <p><strong>Periodo:</strong> <span id="conciliar-periodo"></span></p>
+                <p><strong>Monto:</strong> <span id="conciliar-monto"></span></p>
+                <hr>
+                <label>Monto Confirmado:</label>
+                <input type="number" id="campo-monto" step="0.01" min="0" required>
+
+                <label>Método de Pago:</label>
+                <select id="campo-metodo" required>
+                    <option value="">Seleccionar...</option>
+                    <option value="Pago Movil">Pago Móvil</option>
+                    <option value="Transferencia">Transferencia</option>
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="Punto de Venta">Punto de Venta</option>
+                    <option value="Deposito">Depósito</option>
+                </select>
+
+                <label>Referencia / Nro. Transacción:</label>
+                <input type="text" id="campo-referencia" placeholder="Código de referencia">
+
+                <button id="btn-aprobar-pago" class="boton-crud" style="background:#43a047;margin-top:16px;width:100%;">
+                    <i class="fa-solid fa-check"></i> Aprobar Pago
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-recibo" class="modal-overlay" style="display:none;">
+        <div class="modal-content" style="max-width:420px;">
+            <div class="modal-header">
+                <span class="modal-title">Pago Aprobado</span>
+                <span class="modal-close" id="modal-close-recibo">&times;</span>
+            </div>
+            <div class="modal-body" style="text-align:center;">
+                <p style="font-size:3em;color:#43a047;">&#10004;</p>
+                <p style="font-size:1.2em;font-weight:bold;">Pago registrado exitosamente</p>
+                <p id="recibo-detalle"></p>
+                <button id="btn-descargar-recibo" class="boton-crud" style="background:#0d6efd;margin-top:16px;">
+                    <i class="fa-solid fa-download"></i> Descargar Recibo PDF
+                </button>
+                <button id="btn-cerrar-recibo" class="boton-crud" style="margin-top:8px;">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

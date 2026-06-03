@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Orden de Mérito</title>
+    <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <div class="container-panel">
+        <h2 class="general-tittle"><i class="fa-solid fa-trophy"></i> Orden de Mérito</h2>
+
+        <div class="contenedor-orden-merito">
+            <div class="contenedor-orden-merito__form-group">
+                <label for="carrera-orden-merito">Carrera:</label>
+                <select id="carrera-orden-merito" class="input-recuperacion">
+                    <option value="" disabled selected>Seleccione una Carrera</option>
+                </select>
+            </div>
+            <div class="contenedor-orden-merito__form-group">
+                <label for="pensum-orden-merito">Pensum:</label>
+                <select id="pensum-orden-merito" class="input-recuperacion" disabled>
+                    <option value="" disabled selected>Seleccione un Pensum</option>
+                </select>
+            </div>
+            <div class="contenedor-orden-merito__form-group">
+                <label for="periodo-orden-merito">Período Académico:</label>
+                <select id="periodo-orden-merito" class="input-recuperacion">
+                    <option value="" disabled selected>Seleccione un Período</option>
+                </select>
+            </div>
+            <button class="contenedor-orden-merito__boton login-button"><i class="fa-solid fa-file-pdf"></i> Generar Orden de Mérito</button>
+
+            <div id="resultado-orden-merito"></div>
+        </div>
+    </div>
+
+    <script src="../js/orden-merito.js"></script>
+</body>
+</html>

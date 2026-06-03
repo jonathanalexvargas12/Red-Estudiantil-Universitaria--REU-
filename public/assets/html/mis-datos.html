@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Mis datos</title>
+    <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    <script type="module" src="../js/mis-datos.js"></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+<div class="contenedor-mis-datos">
+        <div class="contenedor-mis-datos__titulo">
+            <i class="fa-solid fa-user"></i> 
+            <h2>Mis Datos</h2>
+        </div>
+        <div>
+        <img src="../img/mis-datos.png" alt="Foto de Perfil" class="contenedor-mis-datos__imagen">
+    
+        <div class="contenedor-mis-datos__form-group">
+            <label for="cedula" class="contenedor-mis-datos__label">Cédula:</label>
+            <input type="text" id="cedula" class="contenedor-mis-datos__input" readonly value="00000000">
+        </div>
+    
+        <div class="contenedor-mis-datos__form-group">
+            <label for="nombres" class="contenedor-mis-datos__label">Nombres:</label>
+            <input type="text" id="nombres" class="contenedor-mis-datos__input" readonly value="Nombre Ejemplo">
+        </div>
+    
+        <div class="contenedor-mis-datos__form-group">
+            <label for="apellidos" class="contenedor-mis-datos__label">Apellidos:</label>
+            <input type="text" id="apellidos" class="contenedor-mis-datos__input" readonly value="Apellido Ejemplo">
+        </div>
+    
+        <div class="contenedor-mis-datos__form-group">
+            <label for="direccion" class="contenedor-mis-datos__label">Dirección:</label>
+            <input type="text" id="direccion" class="contenedor-mis-datos__input" readonly value="Caracas">
+        </div>
+    
+        <div class="contenedor-mis-datos__form-group">
+            <label for="telefono1" class="contenedor-mis-datos__label">Teléfono 1:</label>
+            <input type="text" id="telefono1" class="contenedor-mis-datos__input" readonly value="(0412) 0000000">
+        </div>
+    
+        <div class="contenedor-mis-datos__form-group">
+            <label for="telefono2" class="contenedor-mis-datos__label">Teléfono 2:</label>
+            <input type="text" id="telefono2" class="contenedor-mis-datos__input" readonly value="(0424) 0000000">
+        </div>
+    
+        <div class="contenedor-mis-datos__form-group">
+            <label for="correo" class="contenedor-mis-datos__label">Correo:</label>
+            <input type="email" id="correo" class="contenedor-mis-datos__input" readonly value="email@example.com">
+        </div>
+    
+        <div class="contenedor-mis-datos__form-group">
+            <label for="usuario" class="contenedor-mis-datos__label">Usuario:</label>
+            <input type="text" id="usuario" class="contenedor-mis-datos__input" readonly value="usuario123">
+        </div>
+    
+        <div class="contenedor-mis-datos__form-group">
+            <label class="contenedor-mis-datos__label">Rol:</label>
+            <div class="contenedor-mis-datos__checkbox-group">
+                <input type="checkbox" id="rol-administrador" name="rol" value="Administrador" disabled>
+                <label for="rol-administrador">Administrador</label><br>
+    
+                <input type="checkbox" id="rol-profesor" name="rol" value="Profesor" disabled>
+                <label for="rol-profesor">Profesor</label><br>
+    
+                <input type="checkbox" id="rol-estudiante" name="rol" value="Estudiante" disabled>
+                <label for="rol-estudiante">Estudiante</label><br>
+                
+                <input type="checkbox" id="rol-control-estudio" name="rol" value="Control_Estudios" disabled>
+                <label for="rol-control-estudio">Control de Estudio</label><br>
+    
+                <input type="checkbox" id="rol-tutor-externo" name="rol" value="Tutor_Externo" disabled>
+                <label for="rol-tutor-externo">Tutor Externo</label><br>
+    
+                <input type="checkbox" id="rol-administrativo" name="rol" value="Administrativo" disabled>
+                <label for="rol-administrativo">Administrativo</label>
+            </div>
+        </div>
+        <div class="contenedor-mis-datos__descripcion">
+            "En este campo para PROFESOR o ESTUDIANTE se crea una ficha o deshabilita el estado de la misma"
+        </div>
+        <div class="contenedor-mis-datos__descripcion">
+             "El rol ADMINISTRADOR se crea solo con un usuario ADMINISTRADOR"
+        </div>
+    </div>
+
+
+</body>
+</html>

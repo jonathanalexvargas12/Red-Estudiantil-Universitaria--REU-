@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Notas Certificadas</title>
+    <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    </head>
+<body>
+    <div id="header-placeholder"></div>
+<div class="contenedor-notas-certificadas">
+        <div class="contenedor-notas-certificadas__titulo">
+            <i class="fa-solid fa-award"></i>
+            <h2>Estudiantes, Notas Certificadas</h2>
+        </div>
+    
+        <div class="contenedor-notas-certificadas__form-group">
+            <label for="buscar-estudiante-certificadas" class="contenedor-notas-certificadas__label">Cédula del Estudiante:</label>
+            <div class="contenedor-busqueda">
+                <input type="text" id="buscar-estudiante-certificadas" class="contenedor-notas-certificadas__input" placeholder="Ingrese la cédula del estudiante">
+            </div>
+        </div>
+    
+        <button class="contenedor-notas-certificadas__boton" id="btn-continuar-certificadas">Continuar</button>
+    </div>
+    <script src="../js/notas-certificadas.js"></script>
+    </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Cambiar Contraseña</title>
+    <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    <script type="module" src="../js/cambiar-contrasena.js"></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+<div class="contenedor-cambiar-contrasena">
+        <div class="contenedor-cambiar-contrasena__titulo">
+            <i class="fa-solid fa-key"></i>
+            <h2>Cambiar Contraseña</h2>
+        </div>
+    
+        <div class="contenedor-cambiar-contrasena__form-group">
+            <label for="nueva-contrasena" class="contenedor-cambiar-contrasena__label">Contraseña Nueva:</label>
+            <input type="password" id="nueva-contrasena" class="contenedor-cambiar-contrasena__input">
+        </div>
+    
+        <div class="contenedor-cambiar-contrasena__form-group">
+            <label for="repetir-contrasena" class="contenedor-cambiar-contrasena__label">Repetir Nueva Contraseña:</label>
+            <input type="password" id="repetir-contrasena" class="contenedor-cambiar-contrasena__input">
+        </div>
+    
+        <button class="contenedor-cambiar-contrasena__boton">Guardar Contraseña</button>
+    </div>
+
+</body>
+</html>

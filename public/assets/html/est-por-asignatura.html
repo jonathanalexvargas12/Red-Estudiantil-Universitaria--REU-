@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Estudiantes por Asignatura</title> 
+   <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    <script type="module" src="../js/est-por-asignatura.js"></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+<h2 class="general-tittle2"><i class="fa-solid fa-users"></i>Estudiantes por Asignatura</h2>
+
+<div class="filtros-busqueda-estudiante-asignatura">
+    <div class="contenedor-filtros-estudiante-asignatura">
+        <input type="text" class="buscar-input-estudiante-asignatura" placeholder="Buscar Estudiantes">
+    </div>
+    <div class="botones-filtro-estudiante-asignatura">
+        <button class="boton-filtro-estudiante-asignatura btn-buscar-estudiante-asignatura">Buscar</button>
+        <button class="boton-filtro-estudiante-asignatura btn-reajustar-estudiante-asignatura">Reajustar</button>
+    </div>
+</div>
+
+<div class="crud-estudiante-asignatura">
+    <main class="crud-estudiante-asignatura-contenedor">
+        <table id="tabla-estudiante-asignatura">
+            <thead>
+                <tr>
+                    <th>Asignatura</th>
+                    <th>Cédula Estudiante</th>
+                    <th>Nombre Estudiante</th>
+                    <th>Carrera</th>
+                    <th>Sem/Trim</th>
+                    <th>Sección</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se cargarán los estudiantes por asignatura -->
+            </tbody>
+        </table>
+    </main>
+
+    <div class="paginacion-crud paginacion-estudiante-asignatura">
+        <button class="pagina-anterior-estudiante-asignatura"><i class="fas fa-chevron-left"></i></button>
+        <div class="numeros-pagina-estudiante-asignatura">
+            <button class="numero-pagina-estudiante-asignatura activo">1</button>
+            <button class="numero-pagina-estudiante-asignatura">2</button>
+        </div>
+        <button class="pagina-siguiente-estudiante-asignatura"><i class="fas fa-chevron-right"></i></button>
+        <span class="info-paginacion-estudiante-asignatura">1-2 de 2</span>
+    </div>
+</div>
+
+
+</html>

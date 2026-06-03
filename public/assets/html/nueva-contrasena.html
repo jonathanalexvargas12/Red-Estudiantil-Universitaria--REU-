@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Recuperar Contraseña - Paso 3</title>
+</head>
+<body class="form-recuperar">
+    <div class="contenedor-recuperacion">
+        <h2 class="titulo-recuperacion">Nueva Contraseña</h2>
+        <form id="form-nueva-contrasena">
+            <label class="label-recuperar">"Su contraseña debe tener de 6 a 8 carácteres"</label>
+            <br>
+            <br>
+            <div class="campo-recuperacion">
+                <label for="nueva-contrasena" class="label-recuperacion">Nueva Contraseña:</label>
+                <input type="password" id="nueva-contrasena"  placeholder="Nueva contraseña" name="nueva_contrasena" class="input-recuperacion" minlength="6" maxlength="8" required>
+            </div>
+            <div class="campo-recuperacion">
+                <label for="confirmar-contrasena" class="label-recuperacion">Confirmar Contraseña:</label>
+                <input type="password" id="confirmar-contrasena" placeholder="Confirmarcontraseña" name="confirmar_contrasena" class="input-recuperacion" minlength="6" maxlength="8" required>
+            </div>
+            <button type="submit" class="boton-recuperacion">Guardar Contraseña</button>
+            <div id="mensaje-contrasena" class="mensaje-recuperacion"></div>
+        </form>
+    </div>
+    <script src="../js/recuperar.js"></script>
+    </body>
+</html>

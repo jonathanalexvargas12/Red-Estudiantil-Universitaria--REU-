@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Pensum</title>
+    <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    <script type="module" src="../js/pensum.js"></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+<div id="agregarPensumModal" class="modal">
+    <div class="agregar-modal-content">
+        <span class="agregar-close">×</span>
+        <h2>Agregar Nuevo Pensum</h2>
+        <form id="agregar-pensum-modal-form">
+        
+            <label for="agregar-codigo-pensum">Código Pensum:</label>
+                <select id="agregar-codigo-pensum" name="agregar-codigo-pensum" required>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                    <option value="">Seleccione un código</option>
+                </select>
+
+            <label for="agregar-nombre-pensum">Nombre:</label>
+            <input type="text" id="agregar-nombre-pensum" name="agregar-nombre-pensum" required>
+
+            <label for="agregar-asignaturas">Asignaturas:</label>
+            <input type="text" id="agregar-asignaturas" name="agregar-asignaturas" required>
+
+            <label for="agregar-estado-pensum">Estado:</label>
+            <select id="agregar-estado-pensum" name="agregar-estado-pensum" required>
+                <option value="activo">Activo</option>
+                <option value="inactivo">Inactivo</option>
+            </select>
+
+            <button type="submit">Agregar Pensum</button>
+            <button type="button" class="cancelar-agregar" id="cancelar-agregar-pensum-modal">Cancelar</button>
+        </form>
+    </div>
+</div>
+
+<div id="editarPensumModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Editar Pensum</h2>
+        <form id="editar-pensum-modal-form">
+            <label for="editar-codigo-pensum">Código Pensum:</label>
+            <select id="editar-codigo-pensum" name="editar-codigo-pensum" required>
+                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                <option value="">Seleccione un código</option>
+            </select>    
+            
+
+            <label for="editar-nombre-pensum">Nombre:</label>
+            <input type="text" id="editar-nombre-pensum" name="editar-nombre-pensum" required>
+
+            <label for="editar-asignaturas">Asignaturas:</label>
+            <input type="text" id="editar-asignaturas" name="editar-asignaturas" required>
+
+            <label for="editar-estado-pensum">Estado:</label>
+            <select id="editar-estado-pensum" name="editar-estado-pensum" required>
+                <option value="activo">Activo</option>
+                <option value="inactivo">Inactivo</option>
+            </select>
+
+            <button type="submit">Guardar Cambios</button>
+            <button type="button" class="cancelar" id="cancelar-editar-pensum-modal">Cancelar</button>
+        </form>
+    </div>
+</div>
+
+<div id="eliminarPensumModal" class="modal">
+    <div class="modal-content">
+        <span class="eliminar-close">&times;</span>
+        <h2>¿Estás seguro de eliminar este pensum?</h2>
+        <div class="botones-modal-eliminar">
+            <button id="btn-aceptar-eliminar-pensum">Aceptar</button>
+            <button id="btn-cancelar-eliminar-pensum">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+    <h2 class="general-tittle2"><i class="fa-solid fa-table"></i>Pensum</h2>
+
+    <div class="cabecera-crud-pensum">
+        <button id="btn-agregar-pensum" class="boton-crud-pensum">Agregar Pensum</button>
+    </div>
+    
+    <div class="filtros-busqueda-pensum">
+        <div class="contenedor-filtros-pensum">
+            <input type="text" class="buscar-input-pensum" placeholder="Buscar Pensum">
+            <select class="filtro-estado-pensum">
+                <option value="" disabled selected>Estado</option>
+                <option value="">Todos</option>
+                <option value="activo">Activo</option>
+                <option value="inactivo">Inactivo</option>
+            </select>
+        </div>
+        <div class="botones-filtro-pensum">
+            <button class="boton-filtro-pensum btn-buscar-pensum">Buscar</button>
+            <button class="boton-filtro-pensum btn-reajustar-pensum">Reajustar</button>
+        </div>
+    </div>
+    
+    <div class="crud-pensum">
+        <main class="crud-pensum-contenedor">
+            <table id="tabla-pensum">
+                <thead>
+                    <tr>
+                        <th>Código Pensum</th>
+                        <th>Nombre</th>
+                        <th>Asignaturas</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                 <!-- Las filas se llenarán dinámicamente con JavaScript -->
+
+                    </tbody>
+            </table>
+        </main>
+    
+        <div class="paginacion-crud paginacion-pensum">
+            <button class="pagina-anterior-pensum"><i class="fas fa-chevron-left"></i></button>
+            <div class="numeros-pagina-pensum">
+                <button class="numero-pagina-pensum activo">1</button>
+                <button class="numero-pagina-pensum">2</button>
+            </div>
+            <button class="pagina-siguiente-pensum"><i class="fas fa-chevron-right"></i></button>
+            <span class="info-paginacion-pensum">1-2 de 2</span>
+        </div>
+    </div>
+    
+
+
+</body>
+</html>

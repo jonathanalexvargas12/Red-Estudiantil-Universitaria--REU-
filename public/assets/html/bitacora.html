@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Bitácora</title>
+    <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    <script type="module" src="../js/bitacora.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+<body>
+    <div id="header-placeholder"></div>
+<h2 class="general-tittle2"><i class="fa-solid fa-magnifying-glass-location"></i>Bitácora</h2>
+
+    <div class="cabecera-crud-bitacora">
+        <button id="btn-filtrar-bitacora" class="boton-crud-bitacora">Filtrar</button>
+        <button id="btn-generar-pdf-bitacora" class="boton-crud-bitacora">Ver Reporte</button>
+    </div>
+
+    <div id="filtros-busqueda-bitacora" class="filtros-busqueda-bitacora oculto">
+        <div class="contenedor-filtros-bitacora">
+            <input type="text" class="buscar-input-bitacora" placeholder="Buscar en la bitácora">
+        </div>
+        <div class="botones-filtro-bitacora">
+            <button class="boton-filtro-bitacora btn-buscar-bitacora">Buscar</button>
+            <button class="boton-filtro-bitacora btn-reajustar-bitacora">Reajustar</button>
+        </div>
+    </div>
+
+    <div class="crud-bitacora">
+        <main class="crud-bitacora-contenedor">
+            <table id="tabla-bitacora">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>IP</th>
+                        <th>Usuario</th>
+                        <th>Acción</th>
+                        <th>Módulo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </main>
+
+        <div class="paginacion-crud paginacion-bitacora">
+            <button class="pagina-anterior-bitacora"><i class="fas fa-chevron-left"></i></button>
+            <div class="numeros-pagina-bitacora">
+                <button class="numero-pagina-bitacora activo">1</button>
+                <button class="numero-pagina-bitacora">2</button>
+            </div>
+            <button class="pagina-siguiente-bitacora"><i class="fas fa-chevron-right"></i></button>
+            <span class="info-paginacion-bitacora">1-2 de 2</span>
+        </div>
+    </div>
+
+    <!-- Modal de Detalles de Bitácora -->
+    <div id="modal-detalle-bitacora" class="modal">
+        <div class="modal-content modal-detalle-content">
+            <span class="close" id="close-detalle-bitacora">&times;</span>
+            <h2><i class="fa-solid fa-receipt"></i> Detalle de Bitácora</h2>
+            <div id="detalle-bitacora-body">
+                <p><strong>ID:</strong> <span id="detalle-id"></span></p>
+                <p><strong>Fecha:</strong> <span id="detalle-fecha"></span></p>
+                <p><strong>Hora:</strong> <span id="detalle-hora"></span></p>
+                <p><strong>Dirección IP:</strong> <span id="detalle-ip"></span></p>
+                <p><strong>Usuario:</strong> <span id="detalle-usuario"></span></p>
+                <p><strong>Acción:</strong> <span id="detalle-accion"></span></p>
+                <p><strong>Módulo:</strong> <span id="detalle-modulo"></span></p>
+                <p><strong>ID del Registro:</strong> <span id="detalle-registro-id"></span></p>
+                <hr>
+                <p><strong>Detalles:</strong></p>
+                <div id="detalle-detalles" class="detalle-texto"></div>
+            </div>
+            <button class="cancelar" id="btn-cerrar-detalle">Cerrar</button>
+        </div>
+    </div>
+
+</body>
+</html>

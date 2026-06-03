@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Gesti&oacute;n de Horarios</title>
+    <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    <script type="module" src="../js/gestion-horarios.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <!-- Modal Agregar -->
+    <div id="agregarHoraModal" class="modal">
+        <div class="agregar-modal-content">
+            <span class="agregar-close">&times;</span>
+            <h2>Agregar Nueva Hora</h2>
+            <form id="agregar-hora-modal-form">
+                <label for="agregar-hora-desde">Desde:</label>
+                <input type="time" id="agregar-hora-desde" name="agregar-hora-desde" required>
+
+                <label for="agregar-hora-hasta">Hasta:</label>
+                <input type="time" id="agregar-hora-hasta" name="agregar-hora-hasta" required>
+
+                <label>D&iacute;as:</label>
+                <div class="dias-checkbox">
+                    <label><input type="checkbox" name="agregar-dias[]" value="Lunes"> Lunes</label>
+                    <label><input type="checkbox" name="agregar-dias[]" value="Martes"> Martes</label>
+                    <label><input type="checkbox" name="agregar-dias[]" value="Mi&eacute;rcoles"> Mi&eacute;rcoles</label>
+                    <label><input type="checkbox" name="agregar-dias[]" value="Jueves"> Jueves</label>
+                    <label><input type="checkbox" name="agregar-dias[]" value="Viernes"> Viernes</label>
+                    <label><input type="checkbox" name="agregar-dias[]" value="S&aacute;bado"> S&aacute;bado</label>
+                </div>
+
+                <label for="agregar-turno">Turno <span class="opcional">(opcional)</span>:</label>
+                <select id="agregar-turno" name="agregar-turno">
+                    <option value="">Auto</option>
+                    <option value="Ma&ntilde;ana">Ma&ntilde;ana</option>
+                    <option value="Tarde">Tarde</option>
+                    <option value="Noche">Noche</option>
+                </select>
+
+                <label for="agregar-carrera">Carrera:</label>
+                <select id="agregar-carrera" name="agregar-carrera" required>
+                    <option value="">Seleccione una carrera</option>
+                </select>
+
+                <label for="agregar-pensum">Pensum <span class="opcional">(opcional)</span>:</label>
+                <select id="agregar-pensum" name="agregar-pensum">
+                    <option value="">Seleccione un pensum</option>
+                </select>
+
+                <label for="agregar-periodo-academico">Periodo Acad&eacute;mico:</label>
+                <select id="agregar-periodo-academico" name="agregar-periodo-academico" required>
+                    <option value="">Seleccione un per&iacute;odo</option>
+                </select>
+
+                <label for="agregar-seccion">Secci&oacute;n:</label>
+                <select id="agregar-seccion" name="agregar-seccion" required>
+                    <option value="">Seleccione una secci&oacute;n</option>
+                </select>
+
+                <label for="agregar-nivel">Nivel <span class="opcional">(opcional)</span>:</label>
+                <select id="agregar-nivel" name="agregar-nivel">
+                    <option value="">Seleccione un nivel</option>
+                </select>
+
+                <label for="agregar-asignatura">Asignatura:</label>
+                <select id="agregar-asignatura" name="agregar-asignatura" required>
+                    <option value="">Seleccione una asignatura</option>
+                </select>
+
+                <label for="agregar-docente">Docente:</label>
+                <select id="agregar-docente" name="agregar-docente" required>
+                    <option value="">Seleccione un docente</option>
+                </select>
+
+                <button type="submit">Agregar Hora</button>
+                <button type="button" class="cancelar-agregar" id="cancelar-agregar-hora-modal">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Editar -->
+    <div id="editarHoraModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Hora</h2>
+            <form id="editar-hora-modal-form">
+                <label for="editar-hora-desde">Desde:</label>
+                <input type="time" id="editar-hora-desde" name="editar-hora-desde" required>
+
+                <label for="editar-hora-hasta">Hasta:</label>
+                <input type="time" id="editar-hora-hasta" name="editar-hora-hasta" required>
+
+                <label>D&iacute;as:</label>
+                <div class="dias-checkbox">
+                    <label><input type="checkbox" name="editar-dias[]" value="Lunes"> Lunes</label>
+                    <label><input type="checkbox" name="editar-dias[]" value="Martes"> Martes</label>
+                    <label><input type="checkbox" name="editar-dias[]" value="Mi&eacute;rcoles"> Mi&eacute;rcoles</label>
+                    <label><input type="checkbox" name="editar-dias[]" value="Jueves"> Jueves</label>
+                    <label><input type="checkbox" name="editar-dias[]" value="Viernes"> Viernes</label>
+                    <label><input type="checkbox" name="editar-dias[]" value="S&aacute;bado"> S&aacute;bado</label>
+                </div>
+
+                <label for="editar-turno">Turno <span class="opcional">(opcional)</span>:</label>
+                <select id="editar-turno" name="editar-turno">
+                    <option value="">Auto</option>
+                    <option value="Ma&ntilde;ana">Ma&ntilde;ana</option>
+                    <option value="Tarde">Tarde</option>
+                    <option value="Noche">Noche</option>
+                </select>
+
+                <label for="editar-carrera">Carrera:</label>
+                <select id="editar-carrera" name="editar-carrera" required>
+                    <option value="">Seleccione una carrera</option>
+                </select>
+
+                <label for="editar-pensum">Pensum <span class="opcional">(opcional)</span>:</label>
+                <select id="editar-pensum" name="editar-pensum">
+                    <option value="">Seleccione un pensum</option>
+                </select>
+
+                <label for="editar-periodo-academico">Periodo Acad&eacute;mico:</label>
+                <select id="editar-periodo-academico" name="editar-periodo-academico" required>
+                    <option value="">Seleccione un per&iacute;odo</option>
+                </select>
+
+                <label for="editar-seccion">Secci&oacute;n:</label>
+                <select id="editar-seccion" name="editar-seccion" required>
+                    <option value="">Seleccione una secci&oacute;n</option>
+                </select>
+
+                <label for="editar-nivel">Nivel <span class="opcional">(opcional)</span>:</label>
+                <select id="editar-nivel" name="editar-nivel">
+                    <option value="">Seleccione un nivel</option>
+                </select>
+
+                <label for="editar-asignatura">Asignatura:</label>
+                <select id="editar-asignatura" name="editar-asignatura" required>
+                    <option value="">Seleccione una asignatura</option>
+                </select>
+
+                <label for="editar-docente">Docente:</label>
+                <select id="editar-docente" name="editar-docente" required>
+                    <option value="">Seleccione un docente</option>
+                </select>
+
+                <button type="submit">Guardar Cambios</button>
+                <button type="button" class="cancelar" id="cancelar-editar-hora-modal">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Eliminar -->
+    <div id="eliminarHoraModal" class="modal">
+        <div class="modal-content">
+            <span class="eliminar-close">&times;</span>
+            <h2>&iquest;Est&aacute;s seguro de eliminar esta hora?</h2>
+            <div class="botones-modal-eliminar">
+                <button id="btn-aceptar-eliminar-hora">Aceptar</button>
+                <button id="btn-cancelar-eliminar-hora">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="general-tittle2"><i class="fa-regular fa-calendar-days"></i>Gesti&oacute;n de Horarios <span id="rol-badge" class="rol-badge"></span></h2>
+
+    <div class="filtros-busqueda-gestion">
+        <div class="contenedor-filtros-gestion">
+            <select id="filtro-carrera">
+                <option value="">Todas las carreras</option>
+            </select>
+            <select id="filtro-periodo">
+                <option value="">Todos los per&iacute;odos</option>
+            </select>
+            <select id="filtro-docente">
+                <option value="">Todos los docentes</option>
+            </select>
+            <input type="text" id="filtro-busqueda" class="buscar-input-gestion" placeholder="Buscar horario...">
+        </div>
+        <div class="botones-filtro-gestion">
+            <button class="boton-filtro-gestion btn-buscar-gestion">Buscar</button>
+            <button class="boton-filtro-gestion btn-reajustar-gestion">Reajustar</button>
+        </div>
+    </div>
+
+    <div class="cabecera-crud-gestion">
+        <button id="btn-agregar-horario" class="boton-crud-gestion"><i class="fa-solid fa-plus"></i> Agregar Horario</button>
+    </div>
+
+    <div class="crud-gestion">
+        <main class="crud-gestion-contenedor">
+            <table id="tabla-gestion">
+                <thead>
+                    <tr>
+                        <th>Carrera</th>
+                        <th>Secci&oacute;n</th>
+                        <th>Periodo</th>
+                        <th>Nivel</th>
+                        <th>Docente</th>
+                        <th>Registros</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </main>
+
+        <div class="paginacion-crud paginacion-gestion">
+            <button class="pagina-anterior-gestion"><i class="fas fa-chevron-left"></i></button>
+            <div class="numeros-pagina-gestion">
+                <button class="numero-pagina-gestion activo">1</button>
+            </div>
+            <button class="pagina-siguiente-gestion"><i class="fas fa-chevron-right"></i></button>
+            <span class="info-paginacion-gestion"></span>
+        </div>
+    </div>
+
+    <!-- Modal Detalle de Grupo -->
+    <div id="detalle-grupo" class="modal">
+        <div class="detalle-grupo-content">
+            <span class="detalle-close">&times;</span>
+            <div class="detalle-grupo-header">
+                <h3><i class="fa-solid fa-list"></i> Detalles: <span id="detalle-titulo"></span></h3>
+            </div>
+            <div class="detalle-grupo-botones-superiores">
+                <button id="btn-agregar-en-grupo" class="boton-crud-gestion"><i class="fa-solid fa-plus"></i> Agregar registro</button>
+                <button id="btn-imprimir-grupo" class="boton-crud-gestion btn-pdf"><i class="fa-solid fa-file-pdf"></i> Imprimir PDF</button>
+            </div>
+            <div class="detalle-grupo-contenedor">
+                <table id="tabla-detalle-grupo">
+                    <thead>
+                        <tr>
+                            <th>Desde</th>
+                            <th>Hasta</th>
+                            <th>D&iacute;as</th>
+                            <th>Turno</th>
+                            <th>Asignatura</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Consultar Oferta Académica</title>
+    <script src="../js/jwt-decode.js"></script>
+  <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    <script type="module" src="../js/consultar-ofertas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+<div class="contenedor-consulta-oferta">
+        <div class="contenedor-consulta-oferta__titulo">
+            <i class="fa-solid fa-clipboard-list"></i>
+            <h2>Consultar Oferta Académica</h2>
+        </div>
+        <div class="contenedor-consulta-oferta__form-group">
+            <label for="carrera" class="contenedor-consulta-oferta__label">Carrera</label>
+            <select id="carrera" class="contenedor-consulta-oferta__select">
+                <option value="" disabled selected>Seleccione una Carrera</option>
+          
+                </select>
+        </div>
+        <div class="contenedor-consulta-oferta__form-group">
+            <label for="pensum" class="contenedor-consulta-oferta__label">Pensum</label>
+            <select id="pensum" class="contenedor-consulta-oferta__select">
+                <option value="" disabled selected>Seleccione un Pensum</option>
+                
+                </select>
+        </div>
+        <div class="contenedor-consulta-oferta__form-group">
+            <label for="periodo" class="contenedor-consulta-oferta__label">Periodo</label>
+            <select id="periodo" class="contenedor-consulta-oferta__select">
+                <option value="" disabled selected>Seleccione un Periodo</option>
+           
+                </select>
+        </div>
+
+        <button class="contenedor-consulta-oferta__boton">Ver Reporte</button>
+ 
+        
+</body>
+</html>

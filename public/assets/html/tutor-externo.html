@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/logoredu.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/1e87b3c56d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Solicitar Tutor externo</title>
+    <script src="../js/jwt-decode.js"></script>
+    <script src="../js/tokenManager.js"></script>
+    <script src="../js/shared.js"></script>
+    <script type="module" src="../js/tutor-externo.js"></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+<div id="agregarTutorModal" class="modal">
+        <div class="agregar-modal-content">
+            <span class="agregar-close">×</span>
+            <h2>Agregar Nuevo Tutor Externo</h2>
+            <form id="agregar-tutor-modal-form">
+                <label for="agregar-cedula-tutor">Cédula del Tutor:</label>
+                <input type="text" id="agregar-cedula-tutor" name="cedula-tutor" required>
+                
+                <label for="agregar-nombre-tutor">Nombre del Tutor:</label>
+                <input type="text" id="agregar-nombre-tutor" name="nombre-tutor" required>
+    
+                <label for="agregar-cedula-solicitante">Cédula del Estudiante:</label>
+                <input type="text" id="agregar-cedula-solicitante" name="cedula-solicitante" required>
+                
+                <label for="agregar-nombre-estudiante">Nombre del Estudiante:</label>
+                <input type="text" id="agregar-nombre-estudiante" name="nombre-estudiante" required>
+    
+                <label for="agregar-fecha-solicitud">Fecha de Solicitud:</label>
+                <input type="date" id="agregar-fecha-solicitud" name="fecha-solicitud" required>
+    
+                <label for="agregar-estatus">Estatus:</label>
+                <select id="agregar-estatus" name="estatus" required>
+                    <option value="tutor-por-aprobar">Por Aprobar</option>
+                    <option value="tutor-rechazado">Rechazado</option>
+                    <option value="tutor-aprobado">Aprobado</option>
+                </select>
+    
+                <button type="submit">Agregar Tutor</button>
+                <button type="button" class="cancelar-agregar" id="cancelar-agregar-tutor-modal">Cancelar</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="editarTutorModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Tutor Externo</h2>
+            <form id="editar-tutor-modal-form">
+                <label for="editar-cedula-tutor">Cédula del Tutor:</label>
+                <input type="text" id="editar-cedula-tutor" name="editar-cedula-tutor" readonly>
+                
+                <label for="editar-nombre-tutor">Nombre del Tutor:</label>
+                <input type="text" id="editar-nombre-tutor" name="editar-nombre-tutor" required>
+    
+                <label for="editar-cedula-solicitante">Cédula del Estudiante:</label>
+                <input type="text" id="editar-cedula-solicitante" name="editar-cedula-solicitante" readonly>
+                
+                <label for="editar-nombre-estudiante">Nombre del Estudiante:</label>
+                <input type="text" id="editar-nombre-estudiante" name="editar-nombre-estudiante" required>
+    
+                <label for="editar-fecha-solicitud">Fecha de Solicitud:</label>
+                <input type="date" id="editar-fecha-solicitud" name="editar-fecha-solicitud" required>
+    
+                <label for="editar-estatus">Estatus:</label>
+                <select id="editar-estatus" name="editar-estatus" required>
+                    <option value="tutor-por-aprobar">Tutor por Aprobar</option>
+                    <option value="tutor-rechazado">Tutor Rechazado</option>
+                    <option value="tutor-aprobado">Tutor Aprobado</option>
+                </select>
+    
+                <button type="submit">Guardar Cambios</button>
+                <button type="button" class="cancelar" id="cancelar-editar-tutor-modal">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="eliminarTutorModal" class="modal">
+        <div class="modal-content">
+            <span class="eliminar-close">&times;</span>
+            <h2>¿Estás seguro de eliminar este tutor?</h2>
+            <div class="botones-modal-eliminar">
+                <button id="btn-aceptar-eliminar-tutor">Aceptar</button>
+                <button id="btn-cancelar-eliminar-tutor">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+
+    <h2 class="general-tittle2"><i class="fas fa-user-tie"></i>Solicitar Tutor externo</h2>
+
+<div class="cabecera-crud-tutor">
+    <button id="btn-agregar-tutor" class="boton-crud-tutor">Agregar</button>
+</div>
+
+<div class="filtros-busqueda-tutor">
+    <div class="contenedor-filtros-tutor">
+        <input type="text" id="buscar-input-tutor" class="buscar-input-tutor" placeholder="Buscar Solicitudes">
+        <select id="estatus-select-tutor" class="estatus-select-tutor">
+            <option value="" disabled selected>Estatus</option>
+            <option value="">Todos</option>
+            <option value="tutor-por-aprobar">Tutor por Aprobar</option>
+            <option value="tutor-rechazado">Tutor Rechazado</option>
+            <option value="tutor-aprobado">Tutor Aprobado</option>
+        </select>
+    </div>
+    <div class="botones-filtro-tutor">
+        <button class="boton-filtro-tutor btn-buscar-tutor">Buscar</button>
+        <button class="boton-filtro-tutor btn-reajustar-tutor">Reajustar</button>
+    </div>
+</div>
+
+<div class="crud-tutor">
+    <main class="crud-tutor-contenedor">
+        <table id="tabla-tutor">
+            <thead>
+                <tr>
+                    <th>Fecha de Solicitud</th>
+                    <th>Tutor a Solicitar</th>
+                    <th>Solicitado por</th>
+                    <th>Estatus</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            <!-- Las filas se llenarán dinámicamente con JavaScript -->
+
+            </tbody>
+        </table>
+    </main>
+    <div class="paginacion-crud paginacion-tutor">
+        <button class="pagina-anterior-tutor"><i class="fas fa-chevron-left"></i></button>
+        <div class="numeros-pagina-tutor">
+            <button class="numero-pagina-tutor activo">1</button>
+            <button class="numero-pagina-tutor">2</button>
+        </div>
+        <button class="pagina-siguiente-tutor"><i class="fas fa-chevron-right"></i></button>
+        <span class="info-paginacion-tutor">1-5 de 14</span>
+    </div>
+</div>
+
+
+</body>
+</html>
